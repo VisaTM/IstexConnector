@@ -74,9 +74,12 @@ public class Readers {
 	 */
 	public static HttpURLConnection getConnection(String url) throws IOException {
 		HttpURLConnection connection;
+		int retry = 10;
 
 		while ((((connection = (HttpURLConnection) new URL(url).openConnection()).getResponseCode() / 100) == 3) && ((url = connection.getHeaderField("Location")) != null)) {
-			;
+			if (retry-- ==0) {
+				throw new IOException ("Trop de redirections.");
+			}
 		}
 		return connection;
 	}
