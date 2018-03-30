@@ -2,18 +2,16 @@ package fr.inist.toolbox.parallel;
 
 import java.util.*;
 
-import toolbox.parallel.*;
-
 
 
 /**
- * La classe {@link Enterprise} permet de parall�liser l'application d'un m�me traitement � des objets diff�rents.<br>
- * Elle cr�e le nombre de threads indiqu� (ouvriers), plus un qui distribuera les missions (distributeur), et les ex�cute.<br>
- * La concurrence �ventuelle entre des traitements ex�cut�s simultan�ment doit �tre g�r�e � l'int�rieur de ces traitements, et leur ordonancement ne doit pas avoir d'importance.<br>
- * Le traitement se lance par {@link #start()} pour une ex�cution asynchrone, ou par {@link #run()} pour une ex�cution synchrone. Il se termine lorsque tous les objets on �t� trait�s ou par un appel �
- * {@link #forbidForeverNewMissionsStart()}. Il peut �tre suspendu par un appel � {@link #postponeNewMissionsStart()} et repris par un appel � {@link #allowNewMissionsStart()}. Le nombre de threads
- * peut �tre ajust� dynamiquement en cours de traitement par un appel � {@link #setWishedWorkersCount(int)}.<br>
- * L'entreprise s'arr�te d�finitivement d�s qu'une exception est collect�e.
+ * La classe {@link Enterprise} permet de paralléliser l'application d'un même traitement à des objets différents.<br>
+ * Elle crée le nombre de threads indiqué (ouvriers), plus un qui distribuera les missions (distributeur), et les exécute.<br>
+ * La concurrence éventuelle entre des traitements exécutés simultanément doit être gérée à l'intérieur de ces traitements, et leur ordonancement ne doit pas avoir d'importance.<br>
+ * Le traitement se lance par {@link #start()} pour une exécution asynchrone, ou par {@link #run()} pour une exécution synchrone. Il se termine lorsque tous les objets on été traités ou par un appel à
+ * {@link #forbidForeverNewMissionsStart()}. Il peut être suspendu par un appel à {@link #postponeNewMissionsStart()} et repris par un appel à {@link #allowNewMissionsStart()}. Le nombre de threads
+ * peut être ajusté dynamiquement en cours de traitement par un appel à {@link #setWishedWorkersCount(int)}.<br>
+ * L'entreprise s'arrète définitivement dès qu'une exception est collectée.
  * @author Ludovic WALLE
  * @param <M> Type des missions.
  **/
@@ -22,9 +20,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * @param wishedWorkerCount Nombre d'ouvriers souhait�s (doit �tre positif ou nul).
-	 * @param missionner Distributeur de missions (ne doit pas �tre <code>null</code>).
-	 * @param stemWorker Ouvrier (ne doit pas �tre <code>null</code>).
+	 * @param wishedWorkerCount Nombre d'ouvriers souhaités (doit être positif ou nul).
+	 * @param missionner Distributeur de missions (ne doit pas être <code>null</code>).
+	 * @param stemWorker Ouvrier (ne doit pas être <code>null</code>).
 	 */
 	public Enterprise(int wishedWorkerCount, Missionner<M> missionner, Worker<M> stemWorker) {
 		this("Enterprise", wishedWorkerCount, missionner, stemWorker);
@@ -34,14 +32,14 @@ public class Enterprise<M extends Mission> extends Thread {
 
 	/**
 	 * @param name Nom de l'entreprise.
-	 * @param wishedWorkerCount Nombre d'ouvriers souhait�s (doit �tre positif ou nul).
-	 * @param missionner Distributeur de missions (ne doit pas �tre <code>null</code>).
-	 * @param stemWorker Ouvrier (ne doit pas �tre <code>null</code>).
+	 * @param wishedWorkerCount Nombre d'ouvriers souhaités (doit être positif ou nul).
+	 * @param missionner Distributeur de missions (ne doit pas être <code>null</code>).
+	 * @param stemWorker Ouvrier (ne doit pas être <code>null</code>).
 	 */
 	public Enterprise(String name, int wishedWorkerCount, Missionner<M> missionner, Worker<M> stemWorker) {
 		super(name);
 		if (wishedWorkerCount <= 0) {
-			throw new IllegalArgumentException("Le nombre d'ouvriers souhait� doit �tre strictement positif: " + wishedWorkerCount);
+			throw new IllegalArgumentException("Le nombre d'ouvriers souhaité doit être strictement positif: " + wishedWorkerCount);
 		}
 		if ((missionner == null) || (stemWorker == null)) {
 			throw new NullPointerException();
@@ -56,7 +54,7 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Autorise le d�marrage de nouvelles missions.
+	 * Autorise le démarrage de nouvelles missions.
 	 */
 	public final void allowNewMissionsStart() {
 		synchronized (newMissionsLock) {
@@ -77,14 +75,14 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Signale que la mission indiqu�e est termin�e avec le nombre de r�sultats indiqu�.<br>
-	 * Cette m�thode sera appel�e par les ouvriers � chaque fois qu'ils ont fini une mission.
+	 * Signale que la mission indiquée est terminée avec le nombre de résultats indiqué.<br>
+	 * Cette méthode sera appelée par les ouvriers à chaque fois qu'ils ont fini une mission.
 	 * @param mission Mission.
-	 * @param count Nombre de r�sultats.
+	 * @param count Nombre de résultats.
 	 */
 	protected final void collectDone(M mission, int count) {
 		if (count < 0) {
-			throw new IllegalArgumentException("Le nombre de r�sultats d'une mission doit �tre positif ou nul: " + count);
+			throw new IllegalArgumentException("Le nombre de résultats d'une mission doit être positif ou nul: " + count);
 		}
 		synchronized (doneLock) {
 			lastDone = mission;
@@ -99,7 +97,7 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Enregistre les exceptions indiqu�es.
+	 * Enregistre les exceptions indiquées.
 	 * @param exceptions Exceptions.
 	 */
 	protected final void collectExceptions(@SuppressWarnings("hiding") Throwable... exceptions) {
@@ -116,8 +114,8 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Signale que l'ouvrier indiqu� a fini de travailler.<br>
-	 * Cette m�thode sera appel�e par les ouvriers quand ils finissent de travailler.
+	 * Signale que l'ouvrier indiqué a fini de travailler.<br>
+	 * Cette méthode sera appelée par les ouvriers quand ils finissent de travailler.
 	 * @param worker Ouvrier qui a fini de travailler.
 	 */
 	protected final void collectFinished(Worker<M> worker) {
@@ -133,8 +131,8 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Signale qu'un ouvrier a commenc� � travailler.<br>
-	 * Cette m�thode sera appel�e par les ouvriers quand ils commencent � travailler.
+	 * Signale qu'un ouvrier a commencé à travailler.<br>
+	 * Cette méthode sera appelée par les ouvriers quand ils commencent à travailler.
 	 */
 	protected final void collectStarted() {
 		synchronized (enterpriseLock) {
@@ -145,7 +143,7 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Interdit d�finitivement le d�marrage de nouvelle mission.
+	 * Interdit définitivement le démarrage de nouvelle mission.
 	 */
 	public final void forbidForeverNewMissionsStart() {
 		synchronized (newMissionsLock) {
@@ -165,9 +163,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le nombre d'ouvriers actifs (non licenci�s).<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Le nombre d'ouvriers actifs (non licenci�s).
+	 * Retourne le nombre d'ouvriers actifs (non licenciés).<br>
+	 * Cette méthode est non bloquante.
+	 * @return Le nombre d'ouvriers actifs (non licenciés).
 	 */
 	public final int getActiveWorkerCount() {
 		return activeWorkers.size();
@@ -176,9 +174,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le nombre d'ouvriers licenci�s finissant leur derni�re mission.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Le nombre d'ouvriers licenci�s finissant leur derni�re mission.
+	 * Retourne le nombre d'ouvriers licenciés finissant leur dernière mission.<br>
+	 * Cette méthode est non bloquante.
+	 * @return Le nombre d'ouvriers licenciés finissant leur dernière mission.
 	 */
 	public final int getDismissedWorkerCount() {
 		return dismissedWorkers.size();
@@ -187,9 +185,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le nombre de missions termin�es.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Le nombre de missions termin�es.
+	 * Retourne le nombre de missions terminées.<br>
+	 * Cette méthode est non bloquante.
+	 * @return Le nombre de missions terminées.
 	 */
 	public final int getDoneCount() {
 		return doneCount;
@@ -198,10 +196,10 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le temps de traitement �coul� en millisecondes.<br>
-	 * Le temps de traitement n'est que le temps pendant lequel le d�marrage de nouvelles missions a �t� autoris�. Il ne tient pas compte des fins de missions effectu�es en dehors de ces p�riodes.
-	 * Cette m�thode est non bloquante.
-	 * @return Le temps de traitement �coul� en millisecondes.
+	 * Retourne le temps de traitement écoulé en millisecondes.<br>
+	 * Le temps de traitement n'est que le temps pendant lequel le démarrage de nouvelles missions a été autorisé. Il ne tient pas compte des fins de missions effectuées en dehors de ces périodes.
+	 * Cette méthode est non bloquante.
+	 * @return Le temps de traitement écoulé en millisecondes.
 	 */
 	public final long getElapsedTime() {
 		return (startTime == -1) ? 0 : previouslyElapsedTime + ((newMissions == NewMissions.ALLOWED) ? System.currentTimeMillis() - startTime : 0);
@@ -210,10 +208,10 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne les exceptions rencontr�es par l'entreprise.<br>
-	 * Si aucune exception n'a �t� rencontr�e, la m�thode retourne un tableau vide, jamais <code>null</code>.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Retourne les exceptions rencontr�es par l'entreprise.
+	 * Retourne les exceptions rencontrées par l'entreprise.<br>
+	 * Si aucune exception n'a été rencontrée, la méthode retourne un tableau vide, jamais <code>null</code>.<br>
+	 * Cette méthode est non bloquante.
+	 * @return Retourne les exceptions rencontrées par l'entreprise.
 	 */
 	public final Throwable[] getExceptions() {
 		synchronized (exceptions) {
@@ -224,12 +222,12 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le nombre attendu de r�sultats (positif ou nul), ou {@link Missionner#NOT_COMPUTABLE} si il n'est pas calculable, ou {@link Missionner#NOT_AVAILABLE} si le calcul est en cours, ou
-	 * {@link Missionner#NOT_COMPUTED} si le calcul n'a pas �t� lanc� (ni {@link #start()}, ni {@link #run()}, ni {@link Missionner#start()}, ni {@link Missionner#run()} n'ont �t� appel�es au
-	 * pr�alable).
-	 * @param waitUntilComputed Indique si cette m�thode attend que le r�sultat soit calcul� ou non. Si <code>true</code>, la valeur retourn�e ne pourra �tre que le nombre attendu de r�sultats
+	 * Retourne le nombre attendu de résultats (positif ou nul), ou {@link Missionner#NOT_COMPUTABLE} si il n'est pas calculable, ou {@link Missionner#NOT_AVAILABLE} si le calcul est en cours, ou
+	 * {@link Missionner#NOT_COMPUTED} si le calcul n'a pas été lancé (ni {@link #start()}, ni {@link #run()}, ni {@link Missionner#start()}, ni {@link Missionner#run()} n'ont été appelées au
+	 * préalable).
+	 * @param waitUntilComputed Indique si cette méthode attend que le résultat soit calculé ou non. Si <code>true</code>, la valeur retournée ne pourra être que le nombre attendu de résultats
 	 *            (positif ou nul) ou {@link Missionner#NOT_COMPUTABLE}.
-	 * @return Le nombre attendu de r�sultats.
+	 * @return Le nombre attendu de résultats.
 	 */
 	public final int getExpectedCount(boolean waitUntilComputed) {
 		return missionner.getExpectedCount(waitUntilComputed);
@@ -238,9 +236,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne la premi�re exception rencontr�e par l'entreprise, ou <code>null</code> si il n'y en a pas.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return La premi�re exception rencontr�e par l'entreprise, ou <code>null</code> si il n'y en a pas.
+	 * Retourne la première exception rencontrée par l'entreprise, ou <code>null</code> si il n'y en a pas.<br>
+	 * Cette méthode est non bloquante.
+	 * @return La première exception rencontrée par l'entreprise, ou <code>null</code> si il n'y en a pas.
 	 */
 	public final Throwable getFirstException() {
 		synchronized (exceptions) {
@@ -255,9 +253,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le derni�re mission termin�e.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Le derni�re mission termin�e.
+	 * Retourne le dernière mission terminée.<br>
+	 * Cette méthode est non bloquante.
+	 * @return Le dernière mission terminée.
 	 */
 	public final M getLastDone() {
 		return lastDone;
@@ -267,8 +265,8 @@ public class Enterprise<M extends Mission> extends Thread {
 
 	/**
 	 * Retourne la mission suivante, ou <code>null</code> si il n'y en a plus.<br>
-	 * Cette m�thode sera appel�e par les ouvriers.<br>
-	 * Cette m�thode est bloquante, et attend qu'une mission soit disponible, ou qu'il n'y en ait plus � distribuer.
+	 * Cette méthode sera appelée par les ouvriers.<br>
+	 * Cette méthode est bloquante, et attend qu'une mission soit disponible, ou qu'il n'y en ait plus à distribuer.
 	 * @return La mission suivante, ou <code>null</code> si il n'y en a plus.
 	 */
 	public final M getNext() {
@@ -292,9 +290,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le nombre de r�sultats des missions termin�es.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Le nombre de r�sultats des missions termin�es.
+	 * Retourne le nombre de résultats des missions terminées.<br>
+	 * Cette méthode est non bloquante.
+	 * @return Le nombre de résultats des missions terminées.
 	 */
 	public final int getProducedCount() {
 		return producedCount;
@@ -303,9 +301,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne le nombre d'ouvriers (actifs ou licenci�s).<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Le nombre d'ouvriers (actifs ou licenci�s).
+	 * Retourne le nombre d'ouvriers (actifs ou licenciés).<br>
+	 * Cette méthode est non bloquante.
+	 * @return Le nombre d'ouvriers (actifs ou licenciés).
 	 */
 	public final int getWorkerCount() {
 		synchronized (workersLock) {
@@ -316,9 +314,9 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Teste si l'entreprise a ferm�.<br>
-	 * L'entreprise ferme si toutes les missions ont �t� effectu�es, ou si il y eu une exception ou une interruption explicite par {@link Enterprise#forbidForeverNewMissionsStart()}.
-	 * @return <code>true</code> si l'entreprise a ferm�, <code>false</code> sinon.
+	 * Teste si l'entreprise a fermé.<br>
+	 * L'entreprise ferme si toutes les missions ont été effectuées, ou si il y eu une exception ou une interruption explicite par {@link Enterprise#forbidForeverNewMissionsStart()}.
+	 * @return <code>true</code> si l'entreprise a fermé, <code>false</code> sinon.
 	 */
 	public final boolean hasClosedDown() {
 		return closedDown;
@@ -327,8 +325,8 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Teste si l'entreprise a rencontr� des exceptions.
-	 * @return <code>true</code> si l'entreprise a rencontr� des exceptions, <code>false</code> sinon.
+	 * Teste si l'entreprise a rencontré des exceptions.
+	 * @return <code>true</code> si l'entreprise a rencontré des exceptions, <code>false</code> sinon.
 	 */
 	public final boolean hasExceptions() {
 		return !exceptions.isEmpty();
@@ -337,7 +335,7 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Interdit temporairement le d�marrage de nouvelle mission.
+	 * Interdit temporairement le démarrage de nouvelle mission.
 	 */
 	public final void postponeNewMissionsStart() {
 		synchronized (newMissionsLock) {
@@ -415,12 +413,12 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Ajuste le nombre d'ouvriers souhait�.
-	 * @param wishedWorkerCount Nombre d'ouvriers souhait� (doit �tre positif ou nul).
+	 * Ajuste le nombre d'ouvriers souhaité.
+	 * @param wishedWorkerCount Nombre d'ouvriers souhaité (doit être positif ou nul).
 	 */
 	public final void setWishedWorkersCount(int wishedWorkerCount) {
 		if (wishedWorkerCount <= 0) {
-			throw new IllegalArgumentException("Le nombre d'ouvriers souhait� doit �tre strictement positif: " + wishedWorkerCount);
+			throw new IllegalArgumentException("Le nombre d'ouvriers souhaité doit être strictement positif: " + wishedWorkerCount);
 		}
 		this.wishedWorkerCount = wishedWorkerCount;
 	}
@@ -428,56 +426,56 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Ouvriers non licenci�s.
+	 * Ouvriers non licenciés.
 	 */
 	private final Vector<Worker<M>> activeWorkers = new Vector<>();
 
 
 
 	/**
-	 * Indique si l'entreprise a ferm�.
+	 * Indique si l'entreprise a fermé.
 	 */
 	private boolean closedDown = false;
 
 
 
 	/**
-	 * Ouvriers licenci�s finissant leur derni�re mission.
+	 * Ouvriers licenciés finissant leur dernière mission.
 	 */
 	private final Vector<Worker<M>> dismissedWorkers = new Vector<>();
 
 
 
 	/**
-	 * Nombre de missions termin�es.
+	 * Nombre de missions terminées.
 	 */
 	private volatile int doneCount = 0;
 
 
 
 	/**
-	 * Verrou pour les missions termin�es.
+	 * Verrou pour les missions terminées.
 	 */
 	private final Object doneLock = "doneLock";
 
 
 
 	/**
-	 * Verrou pour les employ�s.
+	 * Verrou pour les employés.
 	 */
 	private final Object enterpriseLock = "enterpriseLock";
 
 
 
 	/**
-	 * Exceptions rencontr�es.
+	 * Exceptions rencontrées.
 	 */
 	private final Vector<Throwable> exceptions = new Vector<>();
 
 
 
 	/**
-	 * Derni�re mission termin�e.
+	 * Dernière mission terminée.
 	 */
 	private volatile M lastDone = null;
 
@@ -491,71 +489,71 @@ public class Enterprise<M extends Mission> extends Thread {
 
 
 	/**
-	 * Autorisation de d�marrage de nouvelles missions.
+	 * Autorisation de démarrage de nouvelles missions.
 	 */
 	private volatile NewMissions newMissions = NewMissions.POSTPONNED;
 
 
 
 	/**
-	 * Verrou pour l'autorisation de d�marrage de nouvelles missions.
+	 * Verrou pour l'autorisation de démarrage de nouvelles missions.
 	 */
 	private final Object newMissionsLock = "newMissionsLock";
 
 
 
 	/**
-	 * Temps �coul� avant le dernier arret temporaire ou d�finitif, en millisecondes.
+	 * Temps écoulé avant le dernier arret temporaire ou définitif, en millisecondes.
 	 */
 	private volatile long previouslyElapsedTime = 0;
 
 
 
 	/**
-	 * Nombre de r�sulats de missions.
+	 * Nombre de résulats de missions.
 	 */
 	private volatile int producedCount = 0;
 
 
 
 	/**
-	 * Date de derni�re autorisation de commencer de nouvelles missions, ou -1 si elles ne sont pas autoris�es.
+	 * Date de dernière autorisation de commencer de nouvelles missions, ou -1 si elles ne sont pas autorisées.
 	 */
 	private volatile long startTime = -1;
 
 
 
 	/**
-	 * Ouvrier souche (� partir duquel on cr�e des clones).
+	 * Ouvrier souche (à partir duquel on crée des clones).
 	 */
 	private final Worker<M> stemWorker;
 
 
 
 	/**
-	 * Nombre d'ouvriers souhait�.
+	 * Nombre d'ouvriers souhaité.
 	 */
 	private volatile int wishedWorkerCount;
 
 
 
 	/**
-	 * Verrou pour les ouvriers actifs et licenci�s.
+	 * Verrou pour les ouvriers actifs et licenciés.
 	 */
 	private final Object workersLock = "workersLock";
 
 
 
 	/**
-	 * La classe {@link NewMissions} recense les �tats possibles pour le d�marrage de nouvelles taches.
+	 * La classe {@link NewMissions} recense les états possibles pour le démarrage de nouvelles taches.
 	 * @author Ludovic WALLE
 	 */
 	private enum NewMissions {
-	    /** Les nouvelles missions peuvent d�marrer. */
+	    /** Les nouvelles missions peuvent démarrer. */
 		ALLOWED,
-		/** Les nouvelles missions sont interdites, d�finitivement. */
+		/** Les nouvelles missions sont interdites, définitivement. */
 		FORBIDDEN,
-		/** Les nouvelles missions sont report�es, temporairement. */
+		/** Les nouvelles missions sont reportées, temporairement. */
 		POSTPONNED
 	}
 

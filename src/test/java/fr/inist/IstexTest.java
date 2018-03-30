@@ -15,21 +15,21 @@ public class IstexTest {
 
 
 
-	@org.junit.Test public void test_0() throws IOException {
-		System.out.println(new String(IstexTools.getFulltextBytes(IDENTIFICATION_TOKEN, "94ECC9351E82249F2C68B19691BB2C57586DD55B", "txt")));
-	}
-
-
-
-	@org.junit.Test public void test_1() throws IOException {
-		System.out.println(new String(IstexTools.getFulltextBytes(IDENTIFICATION_TOKEN, "94ECC9351E82249F2C68B19691BB2C57586DD55B", "tzxt")));
-	}
-
-
-
-	@org.junit.Test public void test_2() throws IOException {
-		System.out.println(new String(IstexTools.getFulltextBytes(IDENTIFICATION_TOKEN, "94ECC9351E82249F2C68B19691BB2C57786DD55B", "txt")));
-	}
+//	@org.junit.Test public void test_0() throws IOException {
+//		System.out.println(new String(IstexTools.getFulltextBytes(IDENTIFICATION_TOKEN, "94ECC9351E82249F2C68B19691BB2C57586DD55B", "txt")));
+//	}
+//
+//
+//
+//	@org.junit.Test public void test_1() throws IOException {
+//		System.out.println(new String(IstexTools.getFulltextBytes(IDENTIFICATION_TOKEN, "94ECC9351E82249F2C68B19691BB2C57586DD55B", "tzxt")));
+//	}
+//
+//
+//
+//	@org.junit.Test public void test_2() throws IOException {
+//		System.out.println(new String(IstexTools.getFulltextBytes(IDENTIFICATION_TOKEN, "94ECC9351E82249F2C68B19691BB2C57786DD55B", "txt")));
+//	}
 
 
 

@@ -21,7 +21,7 @@ public class IstexIteratorTest {
 	 * @throws Exception
 	 */
 	@org.junit.Test public void testNewHit() throws Exception {
-		IstexTools.newHit(JsonObject.parse("{\"ark\":[\"xxx\"]}"), new TreeMap<String, Json>());
+//		IstexTools.newHit(JsonObject.parse("{\"ark\":[\"xxx\"]}"), new TreeMap<String, Json>());
 //		scanPathes(new IstexIterator("*", "*", null, null));
 //		new IstexIterator("journal", "*", 5000, 0, null, null, null, null);
 //		new IstexIterator("test", "*", 5000, 0, null, null, null, null);

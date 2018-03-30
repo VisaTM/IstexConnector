@@ -2,12 +2,10 @@ package fr.inist.toolbox.parallel;
 
 import java.util.*;
 
-import toolbox.parallel.*;
-
 
 
 /**
- * La classe {@link Employee} repr�sente un employ� g�n�rique.
+ * La classe {@link Employee} représente un employé générique.
  * @author Ludovic WALLE
  * @param <M> Missions.
  */
@@ -16,7 +14,7 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * @param name Nom de l'employ� (peut �tre <code>null</code>).
+	 * @param name Nom de l'employé (peut être <code>null</code>).
 	 */
 	protected Employee(String name) {
 		super(name);
@@ -25,8 +23,8 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * @param name Nom de l'employ� (peut �tre <code>null</code>).
-	 * @param other Autre employ� (ne doit pas �tre <code>null</code>).
+	 * @param name Nom de l'employé (peut être <code>null</code>).
+	 * @param other Autre employé (ne doit pas être <code>null</code>).
 	 */
 	protected Employee(String name, Employee<M> other) {
 		super(name);
@@ -36,31 +34,31 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * M�thode �ventuellement surcharg�e dans les classes d�riv�es, appel�e � la fin du traitement, dans la m�thode {@link #run()} du thread.<br>
-	 * On peut y mettre les op�rations � r�aliser � la fin du traitement, telles que des lib�rations de ressources.<br>
-	 * Par d�faut, cette m�thode ne fait rien.
-	 * @throws Throwable Pour que la m�thode puisse g�n�rer des exceptions.<br>
-	 *             Le traitement sera interrompu si cette m�thode g�n�re une exception.
+	 * Méthode éventuellement surchargée dans les classes dérivées, appelée à la fin du traitement, dans la méthode {@link #run()} du thread.<br>
+	 * On peut y mettre les opérations à réaliser à la fin du traitement, telles que des libérations de ressources.<br>
+	 * Par défaut, cette méthode ne fait rien.
+	 * @throws Throwable Pour que la méthode puisse générer des exceptions.<br>
+	 *             Le traitement sera interrompu si cette méthode génère une exception.
 	 */
 	protected void delegateFinalize() throws Throwable {}
 
 
 
 	/**
-	 * M�thode �ventuellement surcharg�e dans les classes d�riv�es, appel�e au d�but du traitement, dans la m�thode {@link #run()} du thread.<br>
-	 * On peut y mettre les op�rations � r�aliser au d�but du traitement, telles que initialisations lentes. C'est un meilleur emplacement que dans le constructeur, car les op�rations y seront
-	 * r�alis�es de fa�on asynchrone.<br>
-	 * Par d�faut, cette m�thode ne fait rien.
-	 * @throws Throwable Pour que la m�thode puisse g�n�rer des exceptions.<br>
-	 *             Le traitement sera interrompu si cette m�thode g�n�re une exception.
+	 * Méthode éventuellement surchargée dans les classes dérivées, appelée au début du traitement, dans la méthode {@link #run()} du thread.<br>
+	 * On peut y mettre les opérations à réaliser au début du traitement, telles que initialisations lentes. C'est un meilleur emplacement que dans le constructeur, car les opérations y seront
+	 * réalisées de façon asynchrone.<br>
+	 * Par défaut, cette méthode ne fait rien.
+	 * @throws Throwable Pour que la méthode puisse générer des exceptions.<br>
+	 *             Le traitement sera interrompu si cette méthode génère une exception.
 	 */
 	protected void delegateInitialize() throws Throwable {}
 
 
 
 	/**
-	 * Retourne l'entreprise � laquelle l'employ� doit rapporter les exceptions rencontr�es, ou <code>null</code> si elle n'est pas connue.
-	 * @return L'entreprise � laquelle l'employ� doit rapporter les exceptions rencontr�es, ou <code>null</code> si elle n'est pas connue.
+	 * Retourne l'entreprise à laquelle l'employé doit rapporter les exceptions rencontrées, ou <code>null</code> si elle n'est pas connue.
+	 * @return L'entreprise à laquelle l'employé doit rapporter les exceptions rencontrées, ou <code>null</code> si elle n'est pas connue.
 	 */
 	public final Enterprise<M> getEnterprise() {
 		return enterprise;
@@ -69,10 +67,10 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * Retourne les exceptions rencontr�es par l'employ�.<br>
-	 * Si aucune exception n'a �t� rencontr�e, la m�thode retourne un tableau vide, jamais <code>null</code>.<br>
-	 * Cette m�thode est non bloquante.
-	 * @return Retourne les exceptions rencontr�es par l'employ�.
+	 * Retourne les exceptions rencontrées par l'employé.<br>
+	 * Si aucune exception n'a été rencontrée, la méthode retourne un tableau vide, jamais <code>null</code>.<br>
+	 * Cette méthode est non bloquante.
+	 * @return Retourne les exceptions rencontrées par l'employé.
 	 */
 	public final Throwable[] getExceptions() {
 		synchronized (exceptions) {
@@ -83,8 +81,8 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * Teste si cet employ� a rencontr� des exceptions.
-	 * @return <code>true</code> si cet employ� a rencontr� des exceptions, <code>false</code> sinon.
+	 * Teste si cet employé a rencontré des exceptions.
+	 * @return <code>true</code> si cet employé a rencontré des exceptions, <code>false</code> sinon.
 	 */
 	public final boolean hasExceptions() {
 		return !exceptions.isEmpty();
@@ -93,9 +91,9 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * Sp�cifie l'entreprise qui embauche l'employ�, et lui rapporte les �ventuelles exceptions d�j� rencontr�es.<br>
-	 * Cette m�thode ne peut �tre appel�e qu'au plus une seule fois, et uniquement si l'employ� a �t� cr�� par {@link #Employee(String)}.
-	 * @param enterprise Entreprise qui embauche l'employ� (ne doit pas �tre <code>null</code>).
+	 * Spécifie l'entreprise qui embauche l'employé, et lui rapporte les éventuelles exceptions déjà rencontrées.<br>
+	 * Cette méthode ne peut être appelée qu'au plus une seule fois, et uniquement si l'employé a été créé par {@link #Employee(String)}.
+	 * @param enterprise Entreprise qui embauche l'employé (ne doit pas être <code>null</code>).
 	 */
 	protected final void hiredBy(@SuppressWarnings("hiding") Enterprise<M> enterprise) {
 		synchronized (enterpriseLock) {
@@ -113,7 +111,7 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * Enregistre les exceptions indiqu�es, et les rapporte � son entreprise, si elle est connue.
+	 * Enregistre les exceptions indiquées, et les rapporte à son entreprise, si elle est connue.
 	 * @param exceptions Exceptions.
 	 */
 	protected final void reportExceptions(@SuppressWarnings("hiding") Throwable... exceptions) {
@@ -130,7 +128,7 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * Entreprise � laquelle cet employ� appartient. Une fois sp�cifi�e, elle ne peut plus �tre modifi�e.
+	 * Entreprise à laquelle cet employé appartient. Une fois spécifiée, elle ne peut plus être modifiée.
 	 */
 	private Enterprise<M> enterprise = null;
 
@@ -144,14 +142,14 @@ abstract class Employee<M extends Mission> extends Thread {
 
 
 	/**
-	 * Exceptions rencontr�es.
+	 * Exceptions rencontrées.
 	 */
 	private final Vector<Throwable> exceptions = new Vector<>();
 
 
 
 	/**
-	 * Capturer les exceptions non g�r�es.
+	 * Capturer les exceptions non gérées.
 	 */
 	{
 		setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
