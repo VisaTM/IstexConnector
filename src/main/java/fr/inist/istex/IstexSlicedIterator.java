@@ -7,7 +7,7 @@ import java.util.*;
 import fr.inist.toolbox.*;
 import fr.inist.toolbox.json.*;
 import fr.inist.toolbox.json.JsonObject.*;
-import toolbox.parallel.*;
+import fr.inist.toolbox.parallel.*;
 
 
 
@@ -237,7 +237,7 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 	 * raisonnable.<br>
 	 * Un découpage en fixant un seul caractère donne 30 tranches de taille importante. La probabilité d'avoir une erreur est donc importante aussi, ainsi que le temps nécessaire pour une nouvelle
 	 * tentative, sans compter qu'il en faudra peut-être plusieurs.<br>
-	 * Un découpage en fixant plus de deux caractères donne trop de tranches (au minimum 30x30x30 = 27000). Le temps de traitement d'autant de requètes devient trop important.
+	 * Un découpage en fixant plus de deux caractères donne trop de tranches (30x30x30 = 27000 pour 3 caractères). Le temps de traitement d'autant de requètes devient trop important.
 	 * @author Ludovic WALLE
 	 */
 	private class SliceMissionner extends Missionner<SliceMission> {
@@ -253,9 +253,10 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 
 			for (int i = 0; i < chars.length(); i++) {
 				for (int j = 0; j < chars.length(); j++) {
-					query = "arkIstex:ark\\:\\/67375\\/???-" + chars.charAt(i) + chars.charAt(j) + "*";
-
-					slicesQueries.add("arkIstex:*" + chars.charAt(i) + "-" + chars.charAt(j) + " AND (" + query + ")");
+//					for (int k = 0; k < chars.length(); k++) {
+//						slicesQueries.add("arkIstex:ark\\:\\/67375\\/???-" + chars.charAt(i) + chars.charAt(j) + chars.charAt(k) + "*" + " AND (" + query + ")");
+//					}
+					slicesQueries.add("arkIstex:ark\\:\\/67375\\/???-" + chars.charAt(i) + chars.charAt(j) + "*" + " AND (" + query + ")");
 				}
 			}
 			this.output = output;

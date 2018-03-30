@@ -80,8 +80,8 @@ public class CollectPathes {
 		int entryCount = 0;
 		int count = 0;
 
-//		for (IstexSlicedIterator istexIterator = new IstexSlicedIterator("*", null, null, 20); istexIterator.hasNext();) {
-		for (IstexIterator istexIterator = new IstexIterator("stylo", "*", "publicationDate,corpusName"); istexIterator.hasNext();) {
+		for (IstexSlicedIterator istexIterator = new IstexSlicedIterator("*", null, null, 20); istexIterator.hasNext();) {
+//		for (IstexIterator istexIterator = new IstexIterator("stylo", "*", "publicationDate,corpusName"); istexIterator.hasNext();) {
 			try {
 				json = istexIterator.next();
 				if (json != null) {
@@ -102,6 +102,9 @@ public class CollectPathes {
 					}
 					if ((++count % 1000) == 0) {
 						System.out.println(count);
+					}
+					if (count == 1000000) {
+						break;
 					}
 				}
 			} catch (Throwable exception) {
