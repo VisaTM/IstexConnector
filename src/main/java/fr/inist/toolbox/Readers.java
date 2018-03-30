@@ -8,7 +8,7 @@ import java.util.Map.*;
 
 
 /**
- * La classe {@link Readers} .
+ * La classe {@link Readers} des méthodes permettant de lire des données.
  * @author Ludovic WALLE
  */
 public class Readers {

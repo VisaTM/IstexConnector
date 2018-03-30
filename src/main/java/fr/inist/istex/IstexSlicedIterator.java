@@ -12,16 +12,15 @@ import fr.inist.toolbox.parallel.*;
 
 
 /**
- * La classe {@link IstexSlicedIterator} implémente un itérateur sur une recherche ISTEX similaire à {@link IstexIterator}, mais plus rapide, plus résistant aux erreurs (réseau en particulier), bien
- * qu'avec une possibilité d'incohérence de résultat.<br>
- * Pour contourner les erreurs, la recherche sera appliquée par tranche, à des sous ensembles exclusifs de documents ISTEX. Ces différentes tranches seront traitées en parallélisme limité (nombre de
- * recherches simultanées limité). En cas d'erreur sur une tranche, la recherche sera relancée sur cette tranche, en ignorant les résultats déjà récupérés. Les résultats unifiés de toutes les tranches
- * sont récupérables par {@link IstexSlicedIterator#next()}. Une première recherche permet d'obtenir le nombre total de résulats attendus et les éventuelles agrégations correspondant aux facettes
- * demandées.<br>
- * Cette façon de faire peut aboutir à des incohérences liées à la multiplicité des recherches et à leur exécution décalées dans le temps si le contenu d'ISTEX évolue pendant le traitement.
+ * La classe {@link IstexSlicedIterator} implémente un itérateur sur une recherche ISTEX en l'appliquant avec un certain parallélisme à des sous ensembles exclusifs de documents ISTEX (tranches), et
+ * en traitant les erreurs.<br>
+ * En cas d'erreur sur une tranche, la recherche sera relancée sur celle-ci, en ignorant les résultats déjà récupérés. Les résultats unifiés de toutes les tranches sont récupérables par
+ * {@link IstexSlicedIterator#next()}. Une recherche préliminaire permet d'obtenir le nombre total de résulats attendus, et les éventuelles agrégations correspondant aux facettes demandées.<br>
+ * Cette façon de faire peut aboutir à des incohérences liées à la multiplicité des recherches et à leur exécution décalées dans le temps si le contenu d'ISTEX évolue pendant le traitement, mais c'est
+ * très peu probable.
  * @author Ludovic WALLE
  */
-public class IstexSlicedIterator implements Iterator<JsonObject> {
+public class IstexSlicedIterator extends IstexIterator {
 
 
 
@@ -32,11 +31,12 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 	 * @param facets Facettes à retourner, ignoré si <code>null</code>. Voir {@link "https://api.istex.fr/documentation/facets/"}.
 	 */
 	public IstexSlicedIterator(String query, String output, String facets, int count) {
+		super(query, output, facets);
+
 		@SuppressWarnings("hiding") JsonObject json;
 		JsonArray hits;
 
 		try {
-			this.query = query;
 			json = JsonObject.parse(new String(Readers.getBytesFromURL("https://api.istex.fr/document/?size=0&q=" + ((query != null) ? URLEncoder.encode(query, "UTF-8") : "") + ((facets != null) ? "&facets=" + URLEncoder.encode(facets, "UTF-8") : ""))).trim());
 			if (json.has("_error")) {
 				throw new IstexRuntimeException("Erreur ISTEX: " + json.toString());
@@ -52,6 +52,7 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 				}
 			}
 			enterprise = new Enterprise<>(count, new SliceMissionner(query, output), new SliceWorker());
+			enterprise.setDaemon(true);
 			enterprise.start();
 		} catch (JsonException | IOException exception) {
 			throw new IstexRuntimeException(exception);
@@ -61,30 +62,18 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 
 
 	/**
-	 * Retourne les aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a été demandée.
-	 * @return Les aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a été demandée.
+	 * {@inheritDoc}
 	 */
-	public JsonObject getAggregations() {
+	@Override public JsonObject getAggregations() {
 		return aggregations;
 	}
 
 
 
 	/**
-	 * Retourne le nombre de résultats retournés.
-	 * @return Le nombre de résultats retournés.
+	 * {@inheritDoc}
 	 */
-	public int getCount() {
-		return count;
-	}
-
-
-
-	/**
-	 * Retourne le nombre total de résultats, ou -1 si il n'est pas connu.
-	 * @return Le nombre total de résultats, ou -1 si il n'est pas connu.
-	 */
-	public int getTotal() {
+	@Override public int getTotal() {
 		return total;
 	}
 
@@ -153,13 +142,6 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 
 
 	/**
-	 * Nombre de résultats retournés;
-	 */
-	private int count = 0;
-
-
-
-	/**
 	 * Entreprise qui va parcourir les tranches de recherche.
 	 */
 	private final Enterprise<SliceMission> enterprise;
@@ -170,13 +152,6 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 	 * Le résultat à retourner, ou <code>null</code> si il n'y en a pas.
 	 */
 	private volatile JsonObject json = null;
-
-
-
-	/**
-	 * Requète.
-	 */
-	private final String query;
 
 
 
@@ -240,7 +215,7 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 	 * Un découpage en fixant plus de deux caractères donne trop de tranches (30x30x30 = 27000 pour 3 caractères). Le temps de traitement d'autant de requètes devient trop important.
 	 * @author Ludovic WALLE
 	 */
-	private class SliceMissionner extends Missionner<SliceMission> {
+	private static class SliceMissionner extends Missionner<SliceMission> {
 
 
 
@@ -253,9 +228,6 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 
 			for (int i = 0; i < chars.length(); i++) {
 				for (int j = 0; j < chars.length(); j++) {
-//					for (int k = 0; k < chars.length(); k++) {
-//						slicesQueries.add("arkIstex:ark\\:\\/67375\\/???-" + chars.charAt(i) + chars.charAt(j) + chars.charAt(k) + "*" + " AND (" + query + ")");
-//					}
 					slicesQueries.add("arkIstex:ark\\:\\/67375\\/???-" + chars.charAt(i) + chars.charAt(j) + "*" + " AND (" + query + ")");
 				}
 			}
@@ -304,7 +276,9 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 
 
 		/**	 */
-		private SliceWorker() {}
+		private SliceWorker() {
+			setDaemon(true);
+		}
 
 
 
@@ -313,6 +287,7 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 		 */
 		private SliceWorker(SliceWorker other) {
 			super(other);
+			setDaemon(true);
 		}
 
 
@@ -323,13 +298,13 @@ public class IstexSlicedIterator implements Iterator<JsonObject> {
 		@Override protected int delegateDo(SliceMission mission) throws Throwable {
 			Set<String> ids = new HashSet<>();
 			String id;
-			IstexIterator istexIterator;
+			IstexIterator1 istexIterator;
 			@SuppressWarnings("hiding") JsonObject json;
 
 			System.out.println(mission.query);
 			for (;;) {
 				try {
-					for (istexIterator = new IstexIterator(mission.query, mission.output, null); istexIterator.hasNext();) {
+					for (istexIterator = new IstexIterator1(mission.query, mission.output, null); istexIterator.hasNext();) {
 						json = istexIterator.next();
 						id = json.getString("id");
 						if (!ids.contains(id)) {

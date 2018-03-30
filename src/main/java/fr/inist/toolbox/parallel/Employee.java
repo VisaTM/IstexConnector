@@ -18,6 +18,7 @@ abstract class Employee<M extends Mission> extends Thread {
 	 */
 	protected Employee(String name) {
 		super(name);
+		setDaemon(true);
 	}
 
 
@@ -27,7 +28,7 @@ abstract class Employee<M extends Mission> extends Thread {
 	 * @param other Autre employé (ne doit pas être <code>null</code>).
 	 */
 	protected Employee(String name, Employee<M> other) {
-		super(name);
+		this(name);
 		this.enterprise = other.enterprise;
 	}
 

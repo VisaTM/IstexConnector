@@ -49,6 +49,7 @@ public class Enterprise<M extends Mission> extends Thread {
 		this.wishedWorkerCount = wishedWorkerCount;
 		this.missionner = missionner;
 		this.stemWorker = stemWorker;
+		setDaemon(true);
 	}
 
 
