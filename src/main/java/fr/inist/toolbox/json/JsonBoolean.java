@@ -3,7 +3,7 @@ package fr.inist.toolbox.json;
 
 
 /**
- * La classe {@link JsonBoolean} spÃ©cifie un boolÃ©en.
+ * La classe {@link JsonBoolean} spécifie un booléen.
  * @author Ludovic WALLE
  */
 public class JsonBoolean extends JsonAtomic {
@@ -25,7 +25,7 @@ public class JsonBoolean extends JsonAtomic {
 
 
 	/**
-	 * @param other Autre boolÃ©en.
+	 * @param other Autre booléen.
 	 */
 	public JsonBoolean(JsonBoolean other) {
 		this.value = other.value;
@@ -139,8 +139,8 @@ public class JsonBoolean extends JsonAtomic {
 
 
 	/**
-	 * Affecte la valeur indiquÃ©e.
-	 * @param value Valeur (peut Ãªtre <code>null</code>).
+	 * Affecte la valeur indiquée.
+	 * @param value Valeur (peut être <code>null</code>).
 	 */
 	public void setValue(Boolean value) {
 		this.value = value;

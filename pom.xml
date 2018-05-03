@@ -4,6 +4,10 @@
 	<groupId>OMTD-content-connector-istex</groupId>
 	<artifactId>OMTD-content-connector-istex</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>Windows-1252</project.build.sourceEncoding>
+		<maven.test.skip>true</maven.test.skip>
+	</properties>
 
 	<build>
 		<plugins>
@@ -30,6 +34,16 @@
 			<version>[0.0.1-SNAPSHOT, )</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
@@ -43,11 +57,6 @@
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.21</version>
-        </dependency>
         <dependency>
             <groupId>eu.openminted</groupId>
             <artifactId>content-connector-utils</artifactId>
@@ -79,11 +88,6 @@
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
             <version>5.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.21</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

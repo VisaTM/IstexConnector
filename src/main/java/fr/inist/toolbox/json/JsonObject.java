@@ -6,8 +6,8 @@ import java.util.Map.*;
 
 
 /**
- * La classe {@link JsonObject} spÃ©cifie un objet. Un objet est un ensemble de paires nom-valeur. Les noms ne doivent pas Ãªtre <code>null</code>. Il ne peut y avoir au plus qu'une paire portant un nom
- * donnÃ©.
+ * La classe {@link JsonObject} spécifie un objet. Un objet est un ensemble de paires nom-valeur. Les noms ne doivent pas être <code>null</code>. Il ne peut y avoir au plus qu'une paire portant un nom
+ * donné.
  * @author Ludovic WALLE
  */
 public class JsonObject extends JsonContainer implements Iterable<Entry<String, Json>> {
@@ -40,9 +40,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public Json cut(String name) {
 		checkName(name);
@@ -52,9 +52,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public Boolean cutBoolean(String name) {
 		return cutBoolean(name, null);
@@ -63,10 +63,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
 	public Boolean cutBoolean(String name, Option option) {
 		Boolean value;
@@ -79,9 +79,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public Double cutDouble(String name) {
 		return cutDouble(name, null);
@@ -90,10 +90,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
 	public Double cutDouble(String name, Option option) {
 		Double value;
@@ -106,24 +106,24 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
-	public Integer cutInteger(String name) {
+	public Long cutInteger(String name) {
 		return cutInteger(name, null);
 	}
 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
-	public Integer cutInteger(String name, Option option) {
-		Integer value;
+	public Long cutInteger(String name, Option option) {
+		Long value;
 
 		value = getInteger(name, option);
 		remove(name);
@@ -133,9 +133,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public JsonArray cutJsonArray(String name) {
 		return cutJsonArray(name, null);
@@ -144,10 +144,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
 	public JsonArray cutJsonArray(String name, Option option) {
 		JsonArray value;
@@ -160,9 +160,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public JsonObject cutJsonObject(String name) {
 		return cutJsonObject(name, null);
@@ -171,10 +171,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
 	public JsonObject cutJsonObject(String name, Option option) {
 		JsonObject value;
@@ -187,9 +187,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public Number cutNumber(String name) {
 		return cutNumber(name, null);
@@ -198,10 +198,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
 	public Number cutNumber(String name, Option option) {
 		Number value;
@@ -214,9 +214,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return La valeur de la paire coupÃ©e.
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return La valeur de la paire coupée.
 	 */
 	public String cutString(String name) {
 		return cutString(name, null);
@@ -225,10 +225,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
+	 * Coupe l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
 	 * @param option Indication de valeur obligatoire.
-	 * @return La valeur de la paire coupÃ©e.
+	 * @return La valeur de la paire coupée.
 	 */
 	public String cutString(String name, Option option) {
 		String value;
@@ -267,9 +267,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Retourne la valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>null</code>).
-	 * @return La valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * Retourne la valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>null</code>).
+	 * @return La valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
 	 */
 	public Json get(String name) {
 		checkName(name);
@@ -279,9 +279,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Retourne la valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit Ãªtre un boolÃ©en.
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>null</code>).
-	 * @return La valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * Retourne la valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit être un booléen.
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>null</code>).
+	 * @return La valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
 	 */
 	public Boolean getBoolean(String name) {
 		return getBoolean(name, null);
@@ -290,8 +290,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Coupe la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Coupe la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
@@ -307,7 +307,7 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 				jsonValue = (JsonBoolean) pairs.get(name);
 				value = (jsonValue != null) ? jsonValue.getValue() : null;
 			} catch (ClassCastException exception) {
-				throw new JsonRuntimeException("La valeur de \"" + name + "\" n'est pas un boolÃ©en: " + serialize());
+				throw new JsonRuntimeException("La valeur de \"" + name + "\" n'est pas un booléen: " + serialize());
 			}
 		} else {
 			present = false;
@@ -334,8 +334,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @return La valeur.
 	 */
 	public Double getDouble(String name) {
@@ -345,8 +345,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
@@ -360,35 +360,35 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @return La valeur.
 	 */
-	public Integer getInteger(String name) {
+	public Long getInteger(String name) {
 		return getInteger(name, null);
 	}
 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
-	public Integer getInteger(String name, Option option) {
+	public Long getInteger(String name, Option option) {
 		Number number;
 
 		number = getNumber(name, option);
-		return (number == null) ? null : number.intValue();
+		return (number == null) ? null : number.longValue();
 	}
 
 
 
 	/**
-	 * Retourne la valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit Ãªtre un tableau Json.
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>null</code>).
-	 * @return La valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * Retourne la valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit être un tableau Json.
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>null</code>).
+	 * @return La valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
 	 */
 	public JsonArray getJsonArray(String name) {
 		return getJsonArray(name, null);
@@ -397,8 +397,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
@@ -443,9 +443,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Retourne la valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit Ãªtre un objet Json.
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>null</code>).
-	 * @return La valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * Retourne la valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit être un objet Json.
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>null</code>).
+	 * @return La valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
 	 */
 	public JsonObject getJsonObject(String name) {
 		return getJsonObject(name, null);
@@ -454,8 +454,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
@@ -510,9 +510,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Retourne la valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit Ãªtre un nombre (entier ou rÃ©el).
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>null</code>).
-	 * @return La valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * Retourne la valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit être un nombre (entier ou réel).
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>null</code>).
+	 * @return La valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
 	 */
 	public Number getNumber(String name) {
 		return getNumber(name, null);
@@ -521,8 +521,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
@@ -576,9 +576,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Retourne la valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit Ãªtre une chaine.
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>null</code>).
-	 * @return La valeur de la paire portant le nom indiquÃ©, ou <code>null</code> si aucune paire ne porte ce nom.
+	 * Retourne la valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom. Cette valeur doit être une chaine.
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>null</code>).
+	 * @return La valeur de la paire portant le nom indiqué, ou <code>null</code> si aucune paire ne porte ce nom.
 	 */
 	public String getString(String name) {
 		return getString(name, null);
@@ -587,8 +587,8 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Extrait la valeur dont le nom est indiquÃ© de l'objet Json indiquÃ©.
-	 * @param name Nom de la valeur Ã  extraire.
+	 * Extrait la valeur dont le nom est indiqué de l'objet Json indiqué.
+	 * @param name Nom de la valeur à extraire.
 	 * @param option Indication de valeur obligatoire.
 	 * @return La valeur.
 	 */
@@ -604,7 +604,7 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 				jsonValue = (JsonString) pairs.get(name);
 				value = (jsonValue != null) ? jsonValue.getValue() : null;
 			} catch (ClassCastException exception) {
-				throw new JsonRuntimeException("La valeur de \"" + name + "\" n'est pas une chaÃ®ne: " + serialize());
+				throw new JsonRuntimeException("La valeur de \"" + name + "\" n'est pas une chaîne: " + serialize());
 			}
 		} else {
 			present = false;
@@ -635,9 +635,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Teste si une paire portant le nom indiquÃ© existe.
-	 * @param name Nom (peut Ãªtre <code>null</code>, et dans ce cas la mÃ©thode retourne <code>false</code>).
-	 * @return <code>true</code> si une paire portant le nom indiquÃ© existe, <code>false</code> sinon.
+	 * Teste si une paire portant le nom indiqué existe.
+	 * @param name Nom (peut être <code>null</code>, et dans ce cas la méthode retourne <code>false</code>).
+	 * @return <code>true</code> si une paire portant le nom indiqué existe, <code>false</code> sinon.
 	 */
 	public boolean has(String name) {
 		checkName(name);
@@ -677,9 +677,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Supprime l'Ã©ventuelle paire portant le nom indiquÃ©.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return Cet objet, pour pouvoir chaÃ®ner les appels.
+	 * Supprime l'éventuelle paire portant le nom indiqué.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return Cet objet, pour pouvoir chaîner les appels.
 	 */
 	public JsonObject remove(String name) {
 		checkName(name);
@@ -712,9 +712,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * CrÃ©e ou remplace la paire portant le nom indiquÃ©, avec la valeur <code>null</code>.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @return Cet objet, pour pouvoir chaÃ®ner les appels.
+	 * Crée ou remplace la paire portant le nom indiqué, avec la valeur <code>null</code>.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @return Cet objet, pour pouvoir chaîner les appels.
 	 */
 	public JsonObject set(String name) {
 		checkName(name);
@@ -725,10 +725,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * CrÃ©e ou remplace la paire portant le nom indiquÃ©, que la valeur indiquÃ©e soit <code>null</code> ou non.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @param value Valeur Ã  ajouter (peut Ãªtre <code>null</code>).
-	 * @return Cet objet, pour pouvoir chaÃ®ner les appels.
+	 * Crée ou remplace la paire portant le nom indiqué, que la valeur indiquée soit <code>null</code> ou non.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @param value Valeur à ajouter (peut être <code>null</code>).
+	 * @return Cet objet, pour pouvoir chaîner les appels.
 	 */
 	public JsonObject set(String name, Boolean value) {
 		checkName(name);
@@ -739,10 +739,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * CrÃ©e ou remplace la paire portant le nom indiquÃ©, que la valeur indiquÃ©e soit <code>null</code> ou non.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @param value Valeur Ã  ajouter (peut Ãªtre <code>null</code>).
-	 * @return Cet objet, pour pouvoir chaÃ®ner les appels.
+	 * Crée ou remplace la paire portant le nom indiqué, que la valeur indiquée soit <code>null</code> ou non.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @param value Valeur à ajouter (peut être <code>null</code>).
+	 * @return Cet objet, pour pouvoir chaîner les appels.
 	 */
 	public JsonObject set(String name, Json value) {
 		checkName(name);
@@ -753,10 +753,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * CrÃ©e ou remplace la paire portant le nom indiquÃ©, que la valeur indiquÃ©e soit <code>null</code> ou non.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @param value Valeur Ã  ajouter (peut Ãªtre <code>null</code>).
-	 * @return Cet objet, pour pouvoir chaÃ®ner les appels.
+	 * Crée ou remplace la paire portant le nom indiqué, que la valeur indiquée soit <code>null</code> ou non.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @param value Valeur à ajouter (peut être <code>null</code>).
+	 * @return Cet objet, pour pouvoir chaîner les appels.
 	 */
 	public JsonObject set(String name, Number value) {
 		checkName(name);
@@ -767,10 +767,10 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * CrÃ©e ou remplace la paire portant le nom indiquÃ©, que la valeur indiquÃ©e soit <code>null</code> ou non.
-	 * @param name Nom Json (ne doit pas Ãªtre <code>null</code>).
-	 * @param value Valeur Ã  ajouter (peut Ãªtre <code>null</code>).
-	 * @return Cet objet, pour pouvoir chaÃ®ner les appels.
+	 * Crée ou remplace la paire portant le nom indiqué, que la valeur indiquée soit <code>null</code> ou non.
+	 * @param name Nom Json (ne doit pas être <code>null</code>).
+	 * @param value Valeur à ajouter (peut être <code>null</code>).
+	 * @return Cet objet, pour pouvoir chaîner les appels.
 	 */
 	public JsonObject set(String name, String value) {
 		checkName(name);
@@ -781,7 +781,7 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * VÃ©rifie que le nom indiquÃ© est valide.
+	 * Vérifie que le nom indiqué est valide.
 	 * @param name Nom.
 	 * @throws JsonRuntimeException Si le nom est <code>null</code>.
 	 */
@@ -794,9 +794,9 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * Construit l'objet Json correspondant Ã  la chaÃ®ne indiquÃ©e.
-	 * @param string Objet Json sÃ©rialisÃ©.
-	 * @return L'Ã©lÃ©ment Json.
+	 * Construit l'objet Json correspondant à la chaîne indiquée.
+	 * @param string Objet Json sérialisé.
+	 * @return L'élément Json.
 	 * @throws JsonException
 	 */
 	public static JsonObject parse(String string) throws JsonException {
@@ -813,7 +813,7 @@ public class JsonObject extends JsonContainer implements Iterable<Entry<String, 
 
 
 	/**
-	 * La classe {@link Option} recense les niveaux de contraintes pour les mÃ©thodes <code>cut...</code> . Par convention, une valeur <code>null</code> signifie qu'il n'y a pas de contrainte.
+	 * La classe {@link Option} recense les niveaux de contraintes pour les méthodes <code>cut...</code> . Par convention, une valeur <code>null</code> signifie qu'il n'y a pas de contrainte.
 	 * @author Ludovic WALLE
 	 */
 	public static enum Option {

@@ -8,7 +8,7 @@ import java.util.Map.*;
 
 
 /**
- * La classe {@link Readers} des mÃ©thodes permettant de lire des donnÃ©es.
+ * La classe {@link Readers} des méthodes permettant de lire des données.
  * @author Ludovic WALLE
  */
 public class Readers {
@@ -16,9 +16,9 @@ public class Readers {
 
 
 	/**
-	 * Retourne les octets provenant du flux indiquÃ©.
-	 * @param input Flux Ã  lire.
-	 * @return Les octets provenant du flux indiquÃ©.
+	 * Retourne les octets provenant du flux indiqué.
+	 * @param input Flux à lire.
+	 * @return Les octets provenant du flux indiqué.
 	 * @throws IOException
 	 */
 	public static byte[] getBytesFromStream(InputStream input) throws IOException {
@@ -38,10 +38,10 @@ public class Readers {
 
 
 	/**
-	 * Retourne les octets correspondant Ã  l'url indiquÃ©e.
-	 * @param headers EntÃªtes Ã©ventuels (peut Ãªtre <code>null</code>).
+	 * Retourne les octets provenant de l'url indiquée.
+	 * @param headers Entêtes éventuels (peut être <code>null</code>).
 	 * @param url URL.
-	 * @return Les octets reÃ§us.
+	 * @return Les octets reçus.
 	 * @throws IOException
 	 */
 	public static byte[] getBytesFromURL(Map<String, String> headers, String url) throws IOException {
@@ -53,9 +53,9 @@ public class Readers {
 
 
 	/**
-	 * Retourne les octets correspondant Ã  l'url indiquÃ©e.
+	 * Retourne les octets provenant de l'url indiquée.
 	 * @param url URL.
-	 * @return Les octets reÃ§us.
+	 * @return Les octets reçus.
 	 * @throws IOException
 	 */
 	public static byte[] getBytesFromURL(String url) throws IOException {
@@ -67,9 +67,9 @@ public class Readers {
 
 
 	/**
-	 * Retourne les octets correspondant Ã  l'url indiquÃ©e.
+	 * Retourne les octets provenant de l'url indiquée.
 	 * @param url URL.
-	 * @return Les octets reÃ§us.
+	 * @return Les octets reçus.
 	 * @throws IOException
 	 */
 	public static HttpURLConnection getConnection(String url) throws IOException {
@@ -77,8 +77,8 @@ public class Readers {
 		int retry = 10;
 
 		while ((((connection = (HttpURLConnection) new URL(url).openConnection()).getResponseCode() / 100) == 3) && ((url = connection.getHeaderField("Location")) != null)) {
-			if (retry-- ==0) {
-				throw new IOException ("Trop de redirections.");
+			if (retry-- == 0) {
+				throw new IOException("Trop de redirections.");
 			}
 		}
 		return connection;
@@ -87,10 +87,10 @@ public class Readers {
 
 
 	/**
-	 * Retourne les octets correspondant Ã  l'url indiquÃ©e.
-	 * @param headers EntÃªtes Ã©ventuels (peut Ãªtre <code>null</code>).
+	 * Retourne les octets provenant de l'url indiquée.
+	 * @param headers Entêtes éventuels (peut être <code>null</code>).
 	 * @param url URL.
-	 * @return Le flux correspondant Ã  l'url indiquÃ©e.
+	 * @return Le flux provenant de l'url indiquée.
 	 * @throws IOException
 	 */
 	public static InputStream getStreamForURL(Map<String, String> headers, String url) throws IOException {

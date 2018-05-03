@@ -5,10 +5,10 @@ import java.util.regex.*;
 
 
 /**
- * La classe {@link Scanner} facilite le parcours de chaines. Elle associe une chaine de caractÃ¨re et une position courante.<br>
+ * La classe {@link Scanner} facilite le parcours de chaines. Elle associe une chaine de caractère et une position courante.<br>
  * <br>
- * Lorsque la position courante est modifiÃ©e, aucun contrÃ´le de validitÃ© n'est effectuÃ©. La non validitÃ© Ã©ventuelle de la position courante n'est dÃ©tectÃ©e que lors de l'accÃ¨s Ã  la chaine.<br>
- * La chaine ne doit pas Ãªtre <code>null</code>, mais elle peut Ãªtre vide.
+ * Lorsque la position courante est modifiée, aucun contrôle de validité n'est effectué. La non validité éventuelle de la position courante n'est détectée que lors de l'accès à la chaine.<br>
+ * La chaine ne doit pas être <code>null</code>, mais elle peut être vide.
  * @author Ludovic WALLE
  */
 public final class Scanner {
@@ -16,8 +16,8 @@ public final class Scanner {
 
 
 	/**
-	 * Construit un nouveau {@link Scanner} avec la chaine passe en paramÃ¨tre comme chaine Ã  traiter, et 0 comme position courante.
-	 * @param string La chaine Ã  traiter (ne doit pas Ãªtre <code>null</code>).
+	 * Construit un nouveau {@link Scanner} avec la chaine passe en paramètre comme chaine à traiter, et 0 comme position courante.
+	 * @param string La chaine à traiter (ne doit pas être <code>null</code>).
 	 */
 	public Scanner(String string) {
 		if (string == null) {
@@ -30,10 +30,10 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re Ã  la position indiquÃ©e n'est aucun de ceux indiquÃ©s.
-	 * @param index Position absolue du caractÃ¨re Ã  tester.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position indiquÃ©e est valide et que le caractÃ¨re Ã  cette position n'est aucun de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère à la position indiquée n'est aucun de ceux indiqués.
+	 * @param index Position absolue du caractère à tester.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position indiquée est valide et que le caractère à cette position n'est aucun de ceux indiqués, <code>false</code> sinon.
 	 */
 	public boolean absoluteCharIsNoneOf(@SuppressWarnings("hiding") int index, char... expectedChars) {
 		return (index >= 0) && (index < string.length()) && charIsNoneOf(string.charAt(index), expectedChars);
@@ -42,10 +42,10 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re Ã  la position indiquÃ©e est un de ceux indiquÃ©s.
-	 * @param index Position absolue du caractÃ¨re Ã  tester.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position indiquÃ©e est valide et que le caractÃ¨re Ã  cette position est un de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère à la position indiquée est un de ceux indiqués.
+	 * @param index Position absolue du caractère à tester.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position indiquée est valide et que le caractère à cette position est un de ceux indiqués, <code>false</code> sinon.
 	 */
 	public boolean absoluteCharIsOneOf(@SuppressWarnings("hiding") int index, char... expectedChars) {
 		return (index >= 0) && (index < string.length()) && charIsOneOf(string.charAt(index), expectedChars);
@@ -54,9 +54,9 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re Ã  la position courante n'est aucun de ceux indiquÃ©s.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position courante est valide et que le caractÃ¨re Ã  cette position n'est aucun de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère à la position courante n'est aucun de ceux indiqués.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position courante est valide et que le caractère à cette position n'est aucun de ceux indiqués, <code>false</code> sinon.
 	 */
 	public boolean currentCharIsNoneOf(char... expectedChars) {
 		return (index >= 0) && (index < string.length()) && charIsNoneOf(string.charAt(index), expectedChars);
@@ -65,9 +65,9 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re Ã  la position courante est un de ceux indiquÃ©s.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position courante est valide et que le caractÃ¨re Ã  cette position est un de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère à la position courante est un de ceux indiqués.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position courante est valide et que le caractère à cette position est un de ceux indiqués, <code>false</code> sinon.
 	 */
 	public boolean currentCharIsOneOf(char... expectedChars) {
 		return (index >= 0) && (index < string.length()) && charIsOneOf(string.charAt(index), expectedChars);
@@ -76,9 +76,9 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne le caractÃ¨re Ã  la position absolue indiquÃ©e.
-	 * @param index Position absolue du caractÃ¨re.
-	 * @return Le caractÃ¨re Ã  la position indiquÃ©e.
+	 * Retourne le caractère à la position absolue indiquée.
+	 * @param index Position absolue du caractère.
+	 * @return Le caractère à la position indiquée.
 	 * @throws StringIndexOutOfBoundsException Si la position courante est en dehors de la chaine.
 	 */
 	public char getAbsoluteChar(@SuppressWarnings("hiding") int index) throws StringIndexOutOfBoundsException {
@@ -88,9 +88,9 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne le nombre de caractÃ¨res entre la position courante (comprise) et la fin de la chaine.<br>
-	 * La valeur retournÃ©e est 0 si la position courante est Ã©gale au nombre de caractÃ¨res de la chaine, et nÃ©gative si elle est supÃ©rieure.
-	 * @return Le nombre de caractÃ¨res aprÃ¨s la position courante.
+	 * Retourne le nombre de caractères entre la position courante (comprise) et la fin de la chaine.<br>
+	 * La valeur retournée est 0 si la position courante est égale au nombre de caractères de la chaine, et négative si elle est supérieure.
+	 * @return Le nombre de caractères après la position courante.
 	 */
 	public int getCharsToParseCount() {
 		return string.length() - index;
@@ -99,9 +99,9 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne le caractÃ¨re Ã  la position courante.<br>
-	 * La position courante n'est pas modifiÃ©e.
-	 * @return Le caractÃ¨re Ã  la position courante.
+	 * Retourne le caractère à la position courante.<br>
+	 * La position courante n'est pas modifiée.
+	 * @return Le caractère à la position courante.
 	 * @throws StringIndexOutOfBoundsException Si la position courante est en dehors de la chaine.
 	 */
 	public char getCurrentChar() throws StringIndexOutOfBoundsException {
@@ -111,10 +111,10 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne le caractÃ¨re Ã  la position courante puis modifie la position courante de la valeur indiquÃ©e.<br>
-	 * La position courante est incrÃ©mentÃ©e de 1. Elle peut se retrouver en dehors de la chaine.
-	 * @param charCount Nombre de caractÃ¨res.
-	 * @return Le caractÃ¨re Ã  l'ancienne position courante.
+	 * Retourne le caractère à la position courante puis modifie la position courante de la valeur indiquée.<br>
+	 * La position courante est incrémentée de 1. Elle peut se retrouver en dehors de la chaine.
+	 * @param charCount Nombre de caractères.
+	 * @return Le caractère à l'ancienne position courante.
 	 * @throws StringIndexOutOfBoundsException Si l'ancienne position courante est en dehors de la chaine.
 	 */
 	public char getCurrentCharThenMove(int charCount) throws StringIndexOutOfBoundsException {
@@ -128,11 +128,11 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne le caractÃ¨re Ã  la position courante puis modifie la position courante de la valeur indiquÃ©e si ce caractÃ¨re est un de ceux indiquÃ©s en paramÃ¨tre.<br>
-	 * La position courante est incrÃ©mentÃ©e de la valeur indiquÃ©e ou inchangÃ©e. Elle peut se retrouver en dehors de la chaine.
+	 * Retourne le caractère à la position courante puis modifie la position courante de la valeur indiquée si ce caractère est un de ceux indiqués en paramètre.<br>
+	 * La position courante est incrémentée de la valeur indiquée ou inchangée. Elle peut se retrouver en dehors de la chaine.
 	 * @param condition Condition.
-	 * @param charCount Nombre de caractÃ¨res.
-	 * @return Le caractÃ¨re Ã  la position courante.
+	 * @param charCount Nombre de caractères.
+	 * @return Le caractère à la position courante.
 	 * @throws StringIndexOutOfBoundsException Si la position courante est en dehors de la chaine.
 	 */
 	public char getCurrentCharThenMoveIf(boolean condition, int charCount) throws StringIndexOutOfBoundsException {
@@ -148,12 +148,12 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne un extrait de la requÃªte.<br>
-	 * L'extrait commence au caractÃ¨re en position courrante - <code>before</code> et se termine au caractÃ¨re en position courante + <code>after</code>. Il est encadrÃ© par des <code>...</code> pour
-	 * indiquer que l'extrait est tronquÃ©, au dÃ©but (sauf dans le cas oÃ¹ l'extrait atteint le dÃ©but de la chaine), et Ã  la fin (sauf dans le cas oÃ¹ l'extrait atteint la fin de la chaine).
-	 * @param before Le nombre de caractÃ¨res Ã  extraire avant la position dans la requÃ¨te.
-	 * @param after Le nombre de caractÃ¨res Ã  extraire aprÃ¨s la position dans la requÃ¨te.
-	 * @return Un extrait de la requÃ¨te.
+	 * Retourne un extrait de la requête.<br>
+	 * L'extrait commence au caractère en position courrante - <code>before</code> et se termine au caractère en position courante + <code>after</code>. Il est encadré par des <code>...</code> pour
+	 * indiquer que l'extrait est tronqué, au début (sauf dans le cas où l'extrait atteint le début de la chaine), et à la fin (sauf dans le cas où l'extrait atteint la fin de la chaine).
+	 * @param before Le nombre de caractères à extraire avant la position dans la requète.
+	 * @param after Le nombre de caractères à extraire après la position dans la requète.
+	 * @return Un extrait de la requète.
 	 */
 	public String getFragment(int before, int after) {
 		return getFragment(index, before, after);
@@ -162,13 +162,13 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne un extrait de la requÃ¨te.<br>
-	 * L'extrait commence au caractÃ¨re en position <code>index - before</code> et se termine au caractÃ¨re en position <code>index + after</code>. Il est encadrÃ© par des <code>...</code> pour indiquer
-	 * que l'extrait est tronquÃ©, au dÃ©but (sauf dans le cas oÃ¹ l'extrait atteint le dÃ©but de la chaine), et Ã  la fin (sauf dans le cas oÃ¹ l'extrait atteint la fin de la chaine).
+	 * Retourne un extrait de la requète.<br>
+	 * L'extrait commence au caractère en position <code>index - before</code> et se termine au caractère en position <code>index + after</code>. Il est encadré par des <code>...</code> pour indiquer
+	 * que l'extrait est tronqué, au début (sauf dans le cas où l'extrait atteint le début de la chaine), et à la fin (sauf dans le cas où l'extrait atteint la fin de la chaine).
 	 * @param index La position dans la chaine.
-	 * @param before Le nombre de caractÃ¨res Ã  extraire avant la position dans la requÃ¨te.
-	 * @param after Le nombre de caractÃ¨res Ã  extraire aprÃ¨s la position dans la requÃ¨te.
-	 * @return Un extrait de la requÃ¨te.
+	 * @param before Le nombre de caractères à extraire avant la position dans la requète.
+	 * @param after Le nombre de caractères à extraire après la position dans la requète.
+	 * @return Un extrait de la requète.
 	 */
 	public String getFragment(@SuppressWarnings("hiding") int index, int before, int after) {
 		int first;
@@ -206,10 +206,10 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne la partie de la chaine correspondant au premier groupe capturant du motif indiquÃ© Ã  partir de la position courante, ou <code>null</code> si la chaine ne correspond pas au motif.<br>
-	 * La position courante est incrÃ©mentÃ©e de la longueur totale correspondant au motif.
-	 * @param pattern Motif (doit Ãªtre valide, et comporter au moins un groupe capturant).
-	 * @return La partie de la chaine correspondant au premier groupe capturant du motif indiquÃ© Ã  partir de la position courante, ou <code>null</code> si la chaine ne correspond pas au motif.
+	 * Retourne la partie de la chaine correspondant au premier groupe capturant du motif indiqué à partir de la position courante, ou <code>null</code> si la chaine ne correspond pas au motif.<br>
+	 * La position courante est incrémentée de la longueur totale correspondant au motif.
+	 * @param pattern Motif (doit être valide, et comporter au moins un groupe capturant).
+	 * @return La partie de la chaine correspondant au premier groupe capturant du motif indiqué à partir de la position courante, ou <code>null</code> si la chaine ne correspond pas au motif.
 	 */
 	public String getMatchingPart(Pattern pattern) {
 		Matcher matcher;
@@ -225,9 +225,9 @@ public final class Scanner {
 
 
 	/**
-	 * Retourne le caractÃ¨re Ã  la position relative indiquÃ©e.
-	 * @param charCount Position relative du caractÃ¨re.
-	 * @return Le caractÃ¨re Ã  la position indique.
+	 * Retourne le caractère à la position relative indiquée.
+	 * @param charCount Position relative du caractère.
+	 * @return Le caractère à la position indique.
 	 * @throws StringIndexOutOfBoundsException Si la position courante est en dehors de la chaine.
 	 */
 	public char getRelativeChar(int charCount) throws StringIndexOutOfBoundsException {
@@ -247,8 +247,8 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si la chaine est comlÃ¨tement traitÃ©e.
-	 * @return <code>true</code> si la chaine est complÃ¨tement traitÃ©e, <code>false</code> sinon.
+	 * Teste si la chaine est comlètement traitée.
+	 * @return <code>true</code> si la chaine est complètement traitée, <code>false</code> sinon.
 	 */
 	public boolean hasCharToParse() {
 		return index < string.length();
@@ -257,9 +257,9 @@ public final class Scanner {
 
 
 	/**
-	 * Change la position courante du nombre de caractÃ¨res indiquÃ©.<br>
-	 * Il n'y a aucune vÃ©rification de la position courante, qui peut donc se retrouver en dehors de la chaine.
-	 * @param charCount Nombre de caractÃ¨res.
+	 * Change la position courante du nombre de caractères indiqué.<br>
+	 * Il n'y a aucune vérification de la position courante, qui peut donc se retrouver en dehors de la chaine.
+	 * @param charCount Nombre de caractères.
 	 */
 	public void move(int charCount) {
 		index += charCount;
@@ -268,10 +268,10 @@ public final class Scanner {
 
 
 	/**
-	 * Change la position courante du nombre de caractÃ¨res indiquÃ©, si la condition est vraie.<br>
-	 * Il n'y a aucune vÃ©rification de la position courante, qui peut donc se retrouver en dehors de la chaine.
+	 * Change la position courante du nombre de caractères indiqué, si la condition est vraie.<br>
+	 * Il n'y a aucune vérification de la position courante, qui peut donc se retrouver en dehors de la chaine.
 	 * @param condition Condition.
-	 * @param charCount Nombre de caractÃ¨res.
+	 * @param charCount Nombre de caractères.
 	 * @return La valeur de la condition.
 	 */
 	public boolean moveIf(boolean condition, int charCount) {
@@ -284,10 +284,10 @@ public final class Scanner {
 
 
 	/**
-	 * Change la position courante du nombre de caractÃ¨res indiquÃ©, puis retourne le caractÃ¨re Ã  cette position.<br>
-	 * Il n'y a aucune vÃ©rification de la position courante, qui peut donc se retrouver en dehors de la chaine.
-	 * @param charCount Nombre de caractÃ¨res.
-	 * @return Le caractÃ¨re Ã  la nouvelle position courante.
+	 * Change la position courante du nombre de caractères indiqué, puis retourne le caractère à cette position.<br>
+	 * Il n'y a aucune vérification de la position courante, qui peut donc se retrouver en dehors de la chaine.
+	 * @param charCount Nombre de caractères.
+	 * @return Le caractère à la nouvelle position courante.
 	 * @throws StringIndexOutOfBoundsException Si la position courante est en dehors de la chaine.
 	 */
 	public char moveThenGetCurrentChar(int charCount) throws StringIndexOutOfBoundsException {
@@ -297,9 +297,9 @@ public final class Scanner {
 
 
 	/**
-	 * Change la position courante du nombre de caractÃ¨res indiquÃ©, puis passe tous les caractÃ¨res classÃ©s comme caractÃ¨res d'espacement Ã  partir de cette position.<br>
-	 * Il n'y a aucune vÃ©rification de la position courante, qui peut donc se retrouver en dehors de la chaine.
-	 * @param charCount Nombre de caractÃ¨res.
+	 * Change la position courante du nombre de caractères indiqué, puis passe tous les caractères classés comme caractères d'espacement à partir de cette position.<br>
+	 * Il n'y a aucune vérification de la position courante, qui peut donc se retrouver en dehors de la chaine.
+	 * @param charCount Nombre de caractères.
 	 */
 	public void moveThenSkipWhitespaces(int charCount) {
 		index += charCount;
@@ -311,10 +311,10 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re Ã  la position relative indiquÃ©e n'est aucun de ceux indiquÃ©s.
-	 * @param charCount Position du caractÃ¨re Ã  tester, relativement Ã  la position courante.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position indiquÃ©e est valide et que le caractÃ¨re Ã  cette position n'est aucun de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère à la position relative indiquée n'est aucun de ceux indiqués.
+	 * @param charCount Position du caractère à tester, relativement à la position courante.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position indiquée est valide et que le caractère à cette position n'est aucun de ceux indiqués, <code>false</code> sinon.
 	 */
 	public boolean relativeCharIsNoneOf(int charCount, char... expectedChars) {
 		return absoluteCharIsNoneOf(index + charCount, expectedChars);
@@ -323,10 +323,10 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re Ã  la position relative indiquÃ©e est un de ceux indiquÃ©s.
-	 * @param charCount Position du caractÃ¨re Ã  tester, relativement Ã  la position courante.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position indiquÃ©e est valide et que le caractÃ¨re Ã  cette position est un de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère à la position relative indiquée est un de ceux indiqués.
+	 * @param charCount Position du caractère à tester, relativement à la position courante.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position indiquée est valide et que le caractère à cette position est un de ceux indiqués, <code>false</code> sinon.
 	 */
 	public boolean relativeCharIsOneOf(int charCount, char... expectedChars) {
 		return absoluteCharIsOneOf(index + charCount, expectedChars);
@@ -335,8 +335,8 @@ public final class Scanner {
 
 
 	/**
-	 * SpÃ©cifie la position indiquÃ©e comme position courante.<br>
-	 * Il n'y a aucune vÃ©rification de la position, qui peut donc se retrouver en dehors de la chaine.
+	 * Spécifie la position indiquée comme position courante.<br>
+	 * Il n'y a aucune vérification de la position, qui peut donc se retrouver en dehors de la chaine.
 	 * @param index Position.
 	 */
 	public void setIndex(int index) {
@@ -346,10 +346,10 @@ public final class Scanner {
 
 
 	/**
-	 * Passe tous les caractÃ¨res classÃ©s comme caractÃ¨res d'espacement Ã  partir de la position courante.<br>
-	 * La position courante doit Ãªtre valide.<br>
-	 * La position courante est incrÃ©mentÃ©e du nombre de caractÃ¨res classÃ©s comme caractÃ¨res d'espacement consÃ©cutifs Ã  partir de la position courante. Elle peut se retrouver en dehors de la chaine,
-	 * si il n'y avait pas d'autres caractÃ¨res avant la fin de la chaine.
+	 * Passe tous les caractères classés comme caractères d'espacement à partir de la position courante.<br>
+	 * La position courante doit être valide.<br>
+	 * La position courante est incrémentée du nombre de caractères classés comme caractères d'espacement consécutifs à partir de la position courante. Elle peut se retrouver en dehors de la chaine,
+	 * si il n'y avait pas d'autres caractères avant la fin de la chaine.
 	 */
 	public void skipWhitespaces() {
 		while ((index >= 0) && (index < string.length()) && Character.isWhitespace(string.charAt(index))) {
@@ -360,10 +360,10 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re indiquÃ© n'est aucun de ceux indiquÃ©s.
-	 * @param thatChar CaractÃ¨re Ã  tester.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position courante est valide et que le caractÃ¨re Ã  cette position n'est aucun de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère indiqué n'est aucun de ceux indiqués.
+	 * @param thatChar Caractère à tester.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position courante est valide et que le caractère à cette position n'est aucun de ceux indiqués, <code>false</code> sinon.
 	 */
 	public static boolean charIsNoneOf(char thatChar, char... expectedChars) {
 		for (char expectedChar : expectedChars) {
@@ -377,10 +377,10 @@ public final class Scanner {
 
 
 	/**
-	 * Teste si le caractÃ¨re indiquÃ© est un de ceux indiquÃ©s.
-	 * @param thatChar CaractÃ¨re Ã  tester.
-	 * @param expectedChars CaractÃ¨res attendus.
-	 * @return <code>true</code> si la position courante est valide et que le caractÃ¨re Ã  cette position est un de ceux indiquÃ©s, <code>false</code> sinon.
+	 * Teste si le caractère indiqué est un de ceux indiqués.
+	 * @param thatChar Caractère à tester.
+	 * @param expectedChars Caractères attendus.
+	 * @return <code>true</code> si la position courante est valide et que le caractère à cette position est un de ceux indiqués, <code>false</code> sinon.
 	 */
 	public static boolean charIsOneOf(char thatChar, char... expectedChars) {
 		for (char expectedChar : expectedChars) {
@@ -395,14 +395,14 @@ public final class Scanner {
 
 	/**
 	 * Position courante.<br>
-	 * Cette position peut Ãªtre en dehors de la chaine.
+	 * Cette position peut être en dehors de la chaine.
 	 */
 	private int index;
 
 
 
 	/**
-	 * Chaine Ã  parcourir.
+	 * Chaine à parcourir.
 	 */
 	private final String string;
 

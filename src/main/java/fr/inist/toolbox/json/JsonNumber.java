@@ -3,7 +3,7 @@ package fr.inist.toolbox.json;
 
 
 /**
- * La classe {@link JsonNumber} spÃ©cifie un nombre.
+ * La classe {@link JsonNumber} spécifie un nombre.
  * @author Ludovic WALLE
  */
 public class JsonNumber extends JsonAtomic {
@@ -98,8 +98,8 @@ public class JsonNumber extends JsonAtomic {
 
 
 	/**
-	 * Affecte la valeur indiquÃ©e.
-	 * @param value Valeur (peut Ãªtre <code>null</code>).
+	 * Affecte la valeur indiquée.
+	 * @param value Valeur (peut être <code>null</code>).
 	 */
 	public void setValue(Number value) {
 		this.value = value;

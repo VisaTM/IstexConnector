@@ -1,9 +1,9 @@
-package fr.inist.toolbox.parallel;
+package toolbox.parallel;
 
 
 
 /**
- * La classe {@link Worker} implÃ©mente un ouvrier effectuant des missions.
+ * La classe {@link Worker} implémente un ouvrier effectuant des missions.
  * @author Ludovic WALLE
  * @param <M> Type des missions.
  */
@@ -19,7 +19,7 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * @param other Autre ouvrier (ne doit pas Ãªtre <code>null</code>).
+	 * @param other Autre ouvrier (ne doit pas être <code>null</code>).
 	 */
 	protected Worker(Worker<M> other) {
 		super(getNewWorkerName(), other);
@@ -28,17 +28,17 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * Effectue la mission indiquÃ©e. L'entreprise sera interrompue si cette mÃ©thode gÃ©nÃ¨re une exception.
+	 * Effectue la mission indiquée. L'entreprise sera interrompue si cette méthode génère une exception.
 	 * @param mission Mission.
-	 * @return Le nombre de rÃ©sultats Ã  comptabiliser.
-	 * @throws Throwable Pour que la mÃ©thode puisse gÃ©nÃ©rer des exceptions.
+	 * @return Le nombre de résultats à comptabiliser.
+	 * @throws Throwable Pour que la méthode puisse générer des exceptions.
 	 */
 	protected abstract int delegateDo(M mission) throws Throwable;
 
 
 
 	/**
-	 * Licencie l'ouvrier, qui s'arrÃªtera dÃ¨s qu'il aura fini sa mission en cours.
+	 * Licencie l'ouvrier, qui s'arrêtera dès qu'il aura fini sa mission en cours.
 	 */
 	protected final void dismiss() {
 		dismissed = true;
@@ -47,10 +47,10 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * CrÃ©e un nouvel ouvrier semblable Ã  celui ci.<br>
-	 * Cette mÃ©thode est utilisÃ©e par {@link Enterprise} pour embaucher de nouveaux ouvriers (crÃ©er de nouvelles instances).<br>
-	 * Les classes dÃ©rivÃ©es doivent doivent l'implÃ©menter en passant par le constructeur {@link #Worker(Worker)}. Si il n'y a pas de traitement particulier Ã  faire lors de la crÃ©ation d'un nouvel
-	 * ouvrier, la classe dÃ©rivÃ©e devrait ressembler Ã :<br>
+	 * Crée un nouvel ouvrier semblable à celui ci.<br>
+	 * Cette méthode est utilisée par {@link Enterprise} pour embaucher de nouveaux ouvriers (créer de nouvelles instances).<br>
+	 * Les classes dérivées doivent doivent l'implémenter en passant par le constructeur {@link #Worker(Worker)}. Si il n'y a pas de traitement particulier à faire lors de la création d'un nouvel
+	 * ouvrier, la classe dérivée devrait ressembler à:<br>
 	 * <pre>
 	 * public class MyWorker extends Worker<...> {
 	 *
@@ -75,9 +75,9 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * Signale que l'ouvrier a fini la mission indiquÃ©e.
+	 * Signale que l'ouvrier a fini la mission indiquée.
 	 * @param mission Mission.
-	 * @param count Nombre de rÃ©sultats Ã  comptabiliser.
+	 * @param count Nombre de résultats à comptabiliser.
 	 */
 	protected final void reportDone(M mission, int count) {
 		getEnterprise().collectDone(mission, count);
@@ -95,7 +95,7 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * Signale que l'ouvrier a commencÃ© Ã  travailler.
+	 * Signale que l'ouvrier a commencé à travailler.
 	 */
 	protected final void reportStarted() {
 		getEnterprise().collectStarted();
@@ -125,8 +125,8 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * Retourne le nom Ã  attribuer Ã  l'ouvrier embauchÃ©.
-	 * @return Le nom Ã  attribuer Ã  l'ouvrier embauchÃ©.
+	 * Retourne le nom à attribuer à l'ouvrier embauché.
+	 * @return Le nom à attribuer à l'ouvrier embauché.
 	 */
 	private static String getNewWorkerName() {
 		synchronized (newWorkerIdLock) {
@@ -137,21 +137,21 @@ public abstract class Worker<M extends Mission> extends Employee<M> {
 
 
 	/**
-	 * Indication d'ouvrier licenciÃ© aprÃ¨s la fin de la mission en cours.
+	 * Indication d'ouvrier licencié après la fin de la mission en cours.
 	 */
 	private volatile boolean dismissed = false;
 
 
 
 	/**
-	 * NumÃ©ro Ã  attribuer au prochain ouvrier embauchÃ©.
+	 * Numéro à attribuer au prochain ouvrier embauché.
 	 */
 	private static volatile int newWorkerId = 0;
 
 
 
 	/**
-	 * Verrou du numÃ©ro Ã  attribuer au prochain ouvrier embauchÃ©.
+	 * Verrou du numéro à attribuer au prochain ouvrier embauché.
 	 */
 	private static final Object newWorkerIdLock = "newWorkerId";
 

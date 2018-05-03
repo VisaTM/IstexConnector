@@ -2,23 +2,14 @@ package fr.inist.istex;
 
 import java.util.*;
 
+import org.apache.logging.log4j.*;
+
 import fr.inist.toolbox.json.*;
 
 
 
 /**
- * La classe {@link IstexIterator} impl√©mente un it√©rateur sur une recherche ISTEX.<br>
- * Par coh√©rence, comme dans le mode scroll, utilis√© par certaines impl√©mentations, les r√©sultats ne peuvent pas √™tre tri√©s, la possibilit√© de tri n'est pas prise en compte.<br>
- * Constats empiriques:
- * <ul>
- * <li>Le nombre total de r√©sultats peut fluctuer selon les pages, mais cela ne semble pas avoir de cons√©quences.
- * <li>Si le nombre total de r√©sultats est un multiple du nombre de r√©sultat par page, la derni√®re page est vide (z√©ro hits, pas de noMoreScrollResults ni de nextScrollURI).
- * <li>La syntaxe de nextScrollURI est:<code>https://api.istex.fr/document/?q=...&size=...&output=...&defaultOperator=...&scroll=...&scrollId=...</code>. Les param√®tres <code>size</code>,
- * <code>output</code>, <code>defaultOperator</code> et <code>scroll</code> sont ignor√©s et peuvent √™tre omis, mais si ils sont pr√©sents, il doivent avoir des valeurs valides. Le param√®tre
- * <code>q</code> doit √™tre pr√©sent, avec toujours la m√™me valeur. Modifier <code>q</code> lance une nouvelle recherche.
- * <li>Les <code>aggregations</code> des facettes ne sont pr√©sentes que sur la premi√®re page.
- * </ul>
- * L'acc√®s √† ISTEX se faisant par r√©seau, des erreurs peuvent survenir, de fa√ßon d'autant plus probable que le nombre de r√©sultat est important.
+ * La classe {@link IstexIterator} implÈmente un itÈrateur sur une recherche ISTEX.
  * @author Ludovic WALLE
  */
 public abstract class IstexIterator implements Iterator<JsonObject> {
@@ -26,12 +17,15 @@ public abstract class IstexIterator implements Iterator<JsonObject> {
 
 
 	/**
-	 * @param query Requ√®te, ignor√© si <code>null</code>. Voir {@link "https://api.istex.fr/documentation/search/"}.
-	 * @param output Donn√©es √† retourner, ignor√© si <code>null</code>. Voir {@link "https://api.istex.fr/documentation/results/#selection-des-champs-renvoyes"}.
-	 * @param facets Facettes √† retourner, ignor√© si <code>null</code>. Voir {@link "https://api.istex.fr/documentation/facets/"}.
-	 * @throws IstexRuntimeException En cas d'erreur de parcours des r√©sultats.
+	 * @param query RequËte, ne doit Ítre ni vide ni ni <code>null</code>. Voir {@link "https://api.istex.fr/documentation/search/"}.
+	 * @param output DonnÈes ‡ retourner, ignorÈ si <code>null</code>. Voir {@link "https://api.istex.fr/documentation/results/#selection-des-champs-renvoyes"}.
+	 * @param facets Facettes ‡ retourner, ignorÈ si <code>null</code>. Voir {@link "https://api.istex.fr/documentation/facets/"}.
+	 * @throws IstexException En cas d'erreur de parcours des rÈsultats.
 	 */
-	public IstexIterator(String query, String output, String facets) throws IstexRuntimeException {
+	public IstexIterator(String query, String output, String facets) throws IstexException {
+		if ((query == null) || query.isEmpty()) {
+			throw new IstexException(LOGGER, Level.ERROR, "La requËte est null ou vide.");
+		}
 		this.query = query;
 		this.output = output;
 		this.facets = facets;
@@ -40,16 +34,18 @@ public abstract class IstexIterator implements Iterator<JsonObject> {
 
 
 	/**
-	 * Retourne les aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a √©t√© demand√©e.
-	 * @return Les aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a √©t√© demand√©e.
+	 * Retourne les aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a ÈtÈ demandÈe.
+	 * @return Les aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a ÈtÈ demandÈe.
 	 */
-	public abstract JsonObject getAggregations();
+	public final JsonObject getAggregations() {
+		return aggregations;
+	}
 
 
 
 	/**
-	 * Retourne le nombre de r√©sultats retourn√©s.
-	 * @return Le nombre de r√©sultats retourn√©s.
+	 * Retourne le nombre de rÈsultats retournÈs.
+	 * @return Le nombre de rÈsultats retournÈs.
 	 */
 	public final int getCount() {
 		return count;
@@ -58,33 +54,35 @@ public abstract class IstexIterator implements Iterator<JsonObject> {
 
 
 	/**
-	 * Retourne le nombre total de r√©sultats, ou -1 si il n'est pas connu.
-	 * @return Le nombre total de r√©sultats, ou -1 si il n'est pas connu.
+	 * Retourne le nombre total de rÈsultats, ou -1 si il n'est pas connu.
+	 * @return Le nombre total de rÈsultats, ou -1 si il n'est pas connu.
 	 */
-	public abstract int getTotal();
+	public final int getTotal() {
+		return total;
+	}
 
 
 
 	/**
 	 * {@inheritDoc}
-	 * @throws IstexRuntimeException En cas d'erreur de parcours des r√©sultats.
+	 * @throws IstexException En cas d'erreur de parcours des rÈsultats.
 	 */
-	@Override public abstract boolean hasNext() throws IstexRuntimeException;
+	@Override public abstract boolean hasNext() throws IstexException;
 
 
 
 	/**
 	 * {@inheritDoc}
-	 * @throws IstexRuntimeException En cas d'erreur de parcours des r√©sultats.
+	 * @throws IstexException En cas d'erreur de parcours des rÈsultats.
 	 */
-	@Override public abstract JsonObject next() throws IstexRuntimeException;
+	@Override public abstract JsonObject next() throws IstexException;
 
 
 
 	/**
-	 * Normalise la chaine indiqu√©e pour la comparaison d'URIs.
-	 * @param string Chaine √† normaliser.
-	 * @return La chaine normalis√©e.
+	 * Normalise la chaine indiquÈe pour la comparaison d'URIs.
+	 * @param string Chaine ‡ normaliser.
+	 * @return La chaine normalisÈe.
 	 */
 	protected static final String normalize(String string) {
 		return string.replace("%3A", ":").replace("%28", "(").replace("%29", ")").replace("%2F", "/").replace("%3F", "?").replace("%29", ")").replace("+", "%20");
@@ -93,30 +91,52 @@ public abstract class IstexIterator implements Iterator<JsonObject> {
 
 
 	/**
-	 * Nombre de r√©sultats retourn√©s;
+	 * Aggregations correspondantes aux facettes, ou <code>null</code> si aucune facette n'a ÈtÈ demandÈe. La valeur est initialement <code>null</code>, puis elle prend la premiËre valeur reÁue.
+	 */
+	protected JsonObject aggregations = null;
+
+
+
+	/**
+	 * Nombre de rÈsultats retournÈs;
 	 */
 	protected int count = 0;
 
 
 
 	/**
-	 * Facettes.
+	 * Valeur du paramËtre de recherche listant les facettes ‡ calculer.
 	 */
 	protected final String facets;
 
 
 
 	/**
-	 * Donn√©es √† retourner.
+	 * Valeur du paramËtre de recherche listant les donnÈes ‡ retourner.
 	 */
 	protected final String output;
 
 
 
 	/**
-	 * Requ√®te.
+	 * Valeur du paramËtre de recherche contenant la requËte.
 	 */
 	protected final String query;
+
+
+
+	/**
+	 * Nombre total de rÈsultats.<br>
+	 * La valeur est initialement -1, puis elle prend la premiËre valeur reÁue.
+	 */
+	protected int total = -1;
+
+
+
+	/**
+	 * Logger.
+	 */
+	protected static final Logger LOGGER = LogManager.getLogger();
 
 
 

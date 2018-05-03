@@ -5,7 +5,7 @@ import java.util.*;
 
 
 /**
- * La classe {@link JsonArray} spÃ©cifie un tableau.
+ * La classe {@link JsonArray} spécifie un tableau.
  * @author Ludovic WALLE
  */
 public class JsonArray extends JsonContainer implements Iterable<Json> {
@@ -58,7 +58,7 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * @param jsons Elements Json. Les <code>null</code> sont ignorÃ©s.
+	 * @param jsons Elements Json. Les <code>null</code> sont ignorés.
 	 */
 	public JsonArray(Json... jsons) {
 		for (Json json : jsons) {
@@ -82,6 +82,19 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
+	 * @param numbers Nombres.
+	 */
+	public JsonArray(long... numbers) {
+		if (numbers != null) {
+			for (long number : numbers) {
+				this.jsons.add(new JsonNumber(number));
+			}
+		}
+	}
+
+
+
+	/**
 	 * @param strings Chaines.
 	 */
 	public JsonArray(String... strings) {
@@ -95,8 +108,8 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ©e en derniÃ¨re position.
-	 * @param value Valeur Ã  ajouter.
+	 * Insère la valeur indiquée en dernière position.
+	 * @param value Valeur à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 */
 	public JsonArray append(Boolean value) {
@@ -107,8 +120,8 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ©e en derniÃ¨re position.
-	 * @param json Element Ã  ajouter.
+	 * Insère la valeur indiquée en dernière position.
+	 * @param json Element à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 */
 	public JsonArray append(Json json) {
@@ -119,8 +132,8 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ©e en derniÃ¨re position.
-	 * @param value Valeur Ã  ajouter.
+	 * Insère la valeur indiquée en dernière position.
+	 * @param value Valeur à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 */
 	public JsonArray append(Number value) {
@@ -131,8 +144,8 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ©e en derniÃ¨re position.
-	 * @param value Valeur Ã  ajouter.
+	 * Insère la valeur indiquée en dernière position.
+	 * @param value Valeur à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 */
 	public JsonArray append(String value) {
@@ -143,7 +156,7 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Supprime tous les Ã©lÃ©ments du tableau.
+	 * Supprime tous les éléments du tableau.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 */
 	public JsonArray clear() {
@@ -163,9 +176,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
 	public Json cut(int index) {
@@ -175,11 +188,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
-	 * @throws ClassCastException Si la valeur n'est pas un boolÃ©en.
+	 * @throws ClassCastException Si la valeur n'est pas un booléen.
 	 */
 	public Boolean cutBoolean(int index) {
 		JsonBoolean element;
@@ -191,9 +204,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un nombre.
 	 */
@@ -207,25 +220,25 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un nombre.
 	 */
-	public Integer cutInteger(int index) {
+	public Long cutInteger(int index) {
 		JsonNumber element;
 
 		element = (JsonNumber) jsons.remove(index);
-		return (element != null) ? element.getValue().intValue() : null;
+		return (element != null) ? element.getValue().longValue() : null;
 	}
 
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas tableau Json.
 	 */
@@ -236,9 +249,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un objet Json.
 	 */
@@ -249,9 +262,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un nombre.
 	 */
@@ -265,11 +278,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Coupe l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return La valeur coupÃ©e (peut Ãªtre <code>null</code>).
+	 * Coupe l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return La valeur coupée (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
-	 * @throws ClassCastException Si la valeur n'est pas une chaÃ®ne.
+	 * @throws ClassCastException Si la valeur n'est pas une chaîne.
 	 */
 	public String cutString(int index) {
 		JsonString element;
@@ -307,9 +320,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
 	public Json get(int index) {
@@ -319,11 +332,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
-	 * @throws ClassCastException Si la valeur n'est pas un boolÃ©en.
+	 * @throws ClassCastException Si la valeur n'est pas un booléen.
 	 */
 	public Boolean getBoolean(int index) {
 		JsonBoolean element;
@@ -335,9 +348,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un nombre.
 	 */
@@ -351,25 +364,25 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un nombre.
 	 */
-	public Integer getInteger(int index) {
+	public Long getInteger(int index) {
 		JsonNumber element;
 
 		element = (JsonNumber) jsons.get(index);
-		return (element != null) ? element.getValue().intValue() : null;
+		return (element != null) ? element.getValue().longValue() : null;
 	}
 
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas tableau Json.
 	 */
@@ -380,9 +393,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un objet Json.
 	 */
@@ -393,9 +406,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 * @throws ClassCastException Si la valeur n'est pas un nombre.
 	 */
@@ -409,11 +422,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne la valeur Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @return L'Ã©lÃ©ment Ã  l'index indiquÃ© (peut Ãªtre <code>null</code>).
+	 * Retourne la valeur à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
+	 * @return L'élément à l'index indiqué (peut être <code>null</code>).
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
-	 * @throws ClassCastException Si la valeur n'est pas une chaÃ®ne.
+	 * @throws ClassCastException Si la valeur n'est pas une chaîne.
 	 */
 	public String getString(int index) {
 		JsonString element;
@@ -425,9 +438,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne un tableau contenant les Ã©lÃ©ments Json.<br>
-	 * Le tableau retournÃ© est une copie.
-	 * @return Un tableau contenant les Ã©lÃ©ments Json, jamais <code>null</code>.
+	 * Retourne un tableau contenant les éléments Json.<br>
+	 * Le tableau retourné est une copie.
+	 * @return Un tableau contenant les éléments Json, jamais <code>null</code>.
 	 */
 	public Json[] getValues() {
 		return jsons.toArray(new Json[jsons.size()]);
@@ -448,11 +461,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃªre la valeur indiquÃ©e Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau ou juste aprÃ¨s la fin du tableau).
-	 * @param value Valeur Ã  ajouter.
+	 * Insêre la valeur indiquée à la position indiquée.
+	 * @param index Index (doit être dans le tableau ou juste après la fin du tableau).
+	 * @param value Valeur à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
-	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste aprÃ¨s la fin du tableau.
+	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste après la fin du tableau.
 	 */
 	public JsonArray insert(Boolean value, int index) {
 		jsons.add(index, new JsonBoolean(value));
@@ -462,11 +475,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ© Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau ou juste aprÃ¨s la fin du tableau).
-	 * @param json Element Ã  ajouter.
+	 * Insère la valeur indiqué à la position indiquée.
+	 * @param index Index (doit être dans le tableau ou juste après la fin du tableau).
+	 * @param json Element à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
-	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste aprÃ¨s la fin du tableau.
+	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste après la fin du tableau.
 	 */
 	public JsonArray insert(Json json, int index) {
 		jsons.add(index, json);
@@ -476,11 +489,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ©e Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau ou juste aprÃ¨s la fin du tableau).
-	 * @param value Valeur Ã  ajouter.
+	 * Insère la valeur indiquée à la position indiquée.
+	 * @param index Index (doit être dans le tableau ou juste après la fin du tableau).
+	 * @param value Valeur à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
-	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste aprÃ¨s la fin du tableau.
+	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste après la fin du tableau.
 	 */
 	public JsonArray insert(Number value, int index) {
 		jsons.add(index, new JsonNumber(value));
@@ -490,11 +503,11 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * InsÃ¨re la valeur indiquÃ©e Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau ou juste aprÃ¨s la fin du tableau).
-	 * @param value Valeur Ã  ajouter.
+	 * Insère la valeur indiquée à la position indiquée.
+	 * @param index Index (doit être dans le tableau ou juste après la fin du tableau).
+	 * @param value Valeur à ajouter.
 	 * @return Ce tableau, pour pouvoir chainer les appels.
-	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste aprÃ¨s la fin du tableau.
+	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau et pas non plus juste après la fin du tableau.
 	 */
 	public JsonArray insert(String value, int index) {
 		jsons.add(index, new JsonString(value));
@@ -522,8 +535,8 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Supprime l'Ã©lÃ©ment Ã  l'index indiquÃ©.
-	 * @param index Index (doit Ãªtre dans le tableau).
+	 * Supprime l'élément à l'index indiqué.
+	 * @param index Index (doit être dans le tableau).
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
@@ -577,9 +590,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * SpÃ©cifie la valeur Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @param value Valeur de l'Ã©lÃ©ment (peut Ãªtre <code>null</code>).
+	 * Spécifie la valeur à la position indiquée.
+	 * @param index Index (doit être dans le tableau).
+	 * @param value Valeur de l'élément (peut être <code>null</code>).
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
@@ -591,9 +604,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * SpÃ©cifie la valeur Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @param json Valeur de l'Ã©lÃ©ment (peut Ãªtre <code>null</code>).
+	 * Spécifie la valeur à la position indiquée.
+	 * @param index Index (doit être dans le tableau).
+	 * @param json Valeur de l'élément (peut être <code>null</code>).
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
@@ -605,9 +618,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * SpÃ©cifie la valeur Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @param value Valeur de l'Ã©lÃ©ment (peut Ãªtre <code>null</code>).
+	 * Spécifie la valeur à la position indiquée.
+	 * @param index Index (doit être dans le tableau).
+	 * @param value Valeur de l'élément (peut être <code>null</code>).
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
@@ -619,9 +632,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * SpÃ©cifie la valeur Ã  la position indiquÃ©e.
-	 * @param index Index (doit Ãªtre dans le tableau).
-	 * @param value Valeur de l'Ã©lÃ©ment (peut Ãªtre <code>null</code>).
+	 * Spécifie la valeur à la position indiquée.
+	 * @param index Index (doit être dans le tableau).
+	 * @param value Valeur de l'élément (peut être <code>null</code>).
 	 * @return Ce tableau, pour pouvoir chainer les appels.
 	 * @throws ArrayIndexOutOfBoundsException Si l'index est en dehors du tableau.
 	 */
@@ -633,8 +646,8 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Retourne le nombre d'Ã©lÃ©ments dans le tableau.
-	 * @return Le nombre d'Ã©lÃ©ments dans le tableau.
+	 * Retourne le nombre d'éléments dans le tableau.
+	 * @return Le nombre d'éléments dans le tableau.
 	 */
 	public int size() {
 		return jsons.size();
@@ -643,9 +656,9 @@ public class JsonArray extends JsonContainer implements Iterable<Json> {
 
 
 	/**
-	 * Construit l'objet Json correspondant Ã  la chaine indiquÃ©e.
-	 * @param string Objet Json sÃ©rialisÃ©.
-	 * @return L'Ã©lÃ©ment Json.
+	 * Construit l'objet Json correspondant à la chaine indiquée.
+	 * @param string Objet Json sérialisé.
+	 * @return L'élément Json.
 	 * @throws JsonException
 	 */
 	public static JsonArray parse(String string) throws JsonException {

@@ -3,7 +3,7 @@ package fr.inist.toolbox.json;
 
 
 /**
- * La classe {@link JsonString} spÃ©cifie une chaine.
+ * La classe {@link JsonString} spécifie une chaine.
  * @author Ludovic WALLE
  */
 public class JsonString extends JsonAtomic {
@@ -85,7 +85,7 @@ public class JsonString extends JsonAtomic {
 
 
 	/**
-	 * {@inheritDoc} Les # doivent Ãªtre encodÃ©s pour Ã©viter les interfÃ©rences avec les templates Kendo.
+	 * {@inheritDoc} Les # doivent être encodés pour éviter les interférences avec les templates Kendo.
 	 */
 	@Override public String serialize(String indentation) {
 		if (value != null) {
@@ -98,8 +98,8 @@ public class JsonString extends JsonAtomic {
 
 
 	/**
-	 * Affecte la valeur indiquÃ©e.
-	 * @param value Valeur (peut Ãªtre <code>null</code>).
+	 * Affecte la valeur indiquée.
+	 * @param value Valeur (peut être <code>null</code>).
 	 */
 	public void setValue(String value) {
 		this.value = value;
