@@ -138,7 +138,7 @@ public class IstexSimpleIterator extends IstexIterator {
 							LOGGER.log(Level.INFO, "Pour la requète \"" + query + "\", une agrégation (" + aggregations.serialize() + ") est présente alors qu'elle a déjà été présente dans une page précédente (" + this.aggregations.serialize() + ").");
 						}
 						// URL de la page suivante
-						if ((nextScrollURI != null) && !nextScrollURI.equals(uri = ("https://api.istex.fr/document/?q=" + normalize(URLEncoder.encode(query, "UTF-8")) + "&size=" + SIZE + ((output != null) ? "&output=" + output : "") + "&defaultOperator=OR&scroll=" + SCROLL + "&scrollId=" + this.scrollId))) {
+						if ((nextScrollURI != null) && !nextScrollURI.equals(uri = ("https://api.istex.fr/document/?q=" + normalize(URLEncoder.encode(query, "UTF-8")) + "&size=" + SIZE + ((output != null) ? "&output=" + output : "") + ((facets != null) ? "&facet=" + facets: "") + "&defaultOperator=OR&scroll=" + SCROLL + "&scrollId=" + this.scrollId))) {
 							LOGGER.log(Level.INFO, "Pour la requète \"" + query + "\", l'URI d'accès à la page suivante (" + nextScrollURI + ") n'est pas celle attendue (" + uri + ").");
 						}
 						// indication d'existence de page suivante et lien vers la page suivante
