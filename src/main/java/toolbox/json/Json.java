@@ -1,8 +1,8 @@
-package fr.inist.toolbox.json;
+package toolbox.json;
 
 import java.util.regex.*;
 
-import fr.inist.toolbox.*;
+import toolbox.*;
 
 
 

@@ -1,4 +1,4 @@
-package fr.inist.toolbox;
+package fr.inist.istex;
 
 import java.io.*;
 import java.net.*;
@@ -33,21 +33,6 @@ public class Readers {
 			}
 		}
 		return Arrays.copyOf(bytes, byteCount);
-	}
-
-
-
-	/**
-	 * Retourne les octets provenant de l'url indiquée.
-	 * @param headers Entêtes éventuels (peut être <code>null</code>).
-	 * @param url URL.
-	 * @return Les octets reçus.
-	 * @throws IOException
-	 */
-	public static byte[] getBytesFromURL(Map<String, String> headers, String url) throws IOException {
-		try (InputStream input = getStreamForURL(headers, url)) {
-			return getBytesFromStream(input);
-		}
 	}
 
 

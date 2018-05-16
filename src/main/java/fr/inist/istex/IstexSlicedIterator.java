@@ -6,9 +6,8 @@ import java.util.*;
 
 import org.apache.logging.log4j.*;
 
-import fr.inist.toolbox.*;
-import fr.inist.toolbox.json.*;
-import fr.inist.toolbox.json.JsonObject.*;
+import toolbox.json.*;
+import toolbox.json.JsonObject.*;
 import toolbox.parallel.*;
 
 

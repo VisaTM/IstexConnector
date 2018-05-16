@@ -1,6 +1,6 @@
-package fr.inist.toolbox.json;
+package toolbox.json;
 
-import fr.inist.toolbox.json.JsonObject.*;
+import toolbox.json.JsonObject.*;
 
 
 

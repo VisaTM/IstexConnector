@@ -8,8 +8,7 @@ import java.util.regex.*;
 
 import org.apache.logging.log4j.*;
 
-import fr.inist.toolbox.*;
-import fr.inist.toolbox.json.*;
+import toolbox.json.*;
 
 
 

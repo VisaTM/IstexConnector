@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import fr.inist.istex.*;
-import fr.inist.toolbox.json.*;
+import toolbox.json.*;
 
 
 

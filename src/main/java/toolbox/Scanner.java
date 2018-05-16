@@ -1,4 +1,4 @@
-package fr.inist.toolbox;
+package toolbox;
 
 import java.util.regex.*;
 

@@ -1,4 +1,4 @@
-package fr.inist.toolbox.json;
+package toolbox.json;
 
 import java.util.*;
 

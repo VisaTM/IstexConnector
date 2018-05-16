@@ -11,7 +11,7 @@ import eu.openminted.content.connector.*;
 import eu.openminted.registry.core.domain.*;
 import fr.inist.istex.*;
 import fr.inist.tables.*;
-import fr.inist.toolbox.json.*;
+import toolbox.json.*;
 
 
 
