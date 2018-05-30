@@ -322,7 +322,8 @@ public class IstexContentConnector implements ContentConnector {
 		String istexQueryFragment = "";
 		List<String> values;
 
-		istexQuery = ((keyword == null) || ((keyword = keyword.trim()).isEmpty())) ? "*" : keyword;
+		istexQuery = ((keyword == null) || ((keyword = keyword.trim()).isEmpty())) ? "*" : keyword; // TODO sophistiquer le traitement du champ keyword, ou au minimum encoder les caractères ou
+		                                                                                            // séquences qui pourraient poser des problèmes (délimiteurs, opérateurs, &, ', ", ...)
 
 		if (params != null) {
 			for (Iterator<Entry<String, List<String>>> iterator = params.entrySet().iterator(); iterator.hasNext();) {
