@@ -93,7 +93,7 @@ public class IstexContentConnector implements ContentConnector {
 	 * @return Un flux du texte intégral d'une publication.
 	 */
 	@Override public InputStream downloadFullText(String documentId) {
-		return Istex.getFulltextStream(documentId, null, null); // TODO obtenir le token d'authentification ISTEX, et le format de document
+		return Istex.getFulltextStream(null, documentId, "tei"); // TODO obtenir le token d'authentification ISTEX, et le format de document
 	}
 
 
